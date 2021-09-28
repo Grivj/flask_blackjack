@@ -1,0 +1,7 @@
+__pycache__
+models/__pycache__
+controllers/__pycache__
+templates/__pycache__
+models/__pycache__
+tests/__pycache__
+routes/__pycache__
