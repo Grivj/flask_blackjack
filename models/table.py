@@ -18,8 +18,8 @@ class Table(ABC):
 
 
 class BlackjackTable(Table):
-
-    def __init__(self, n_decks: int = 1, maximum_players: int = 7):
+    def __init__(self, id: int = None, n_decks: int = 1, maximum_players: int = 7):
+        self.id = id
         self.shoe = BlackjackShoe(n_decks)
         self.players: List[Player] = []
         self.maximum_players = maximum_players

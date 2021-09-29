@@ -1,0 +1,43 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='js/elements.cardmeister.full.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/shoe.css') }}">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <card-t rank="Queen" suit="Hearts"></card-t> -->
+    <div class="shoe-container">
+        {% for card in table.shoe.cards %}
+        <card-t rank=0 backtext=' '></card-t>
+        {% endfor %}
+    </div>
+    <p>{{ table.shoe|length }} cards</p>
+
+
+    <div class="player-container">
+        <p class="player-name">
+            {{player.name}}
+        </p>
+        <p class="player-br_balance">
+            {{player.br.balance}}
+        </p>
+        <div class="player-hands-container">
+            {% for hand in player.hands %} {% if hand.cards|length > 0 %}
+            <div class="hand-container">
+                {% for card in hand.cards %}
+                <card-t rank="{{ card.rank.name|lower }}" suit="{{ card.suit.name|lower }}"></card-t>
+                {% endfor %}
+
+            </div> {% endif %} {% endfor %}
+        </div>
+    </div>
+
+
+</body>
+
+</html>
