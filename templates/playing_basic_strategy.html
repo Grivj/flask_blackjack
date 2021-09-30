@@ -14,40 +14,57 @@
   </head>
 
   <body>
-    <!-- <card-t rank="Queen" suit="Hearts"></card-t> -->
-    <div class="shoe-container">
-      {% for card in table.shoe.cards %}
-      <card-t rank="0" backtext="{{ table.shoe|length }}"></card-t>
-      {% endfor %}
-    </div>
+    <div class="table-container">
+      <div class="shoe-container">
+        <div class="shoe-cards">
+          {% for card in table.shoe.cards %}
+          <card-t rank="0" backtext="{{ table.shoe|length }}"></card-t>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="table-action">
+        <form method="post">
+          <input type="submit" value="Deal" name="deal" {{'disabled' if
+          table.dealt}}/>
+          <input type="submit" value="Reset" name="reset" />
+        </form>
+      </div>
 
-    <div class="dealer-action">
-      <form method="post">
-        <input type="submit" value="Deal" name="deal" {{'disabled' if
-        table.dealt else ''}}/>
-        <input type="submit" value="Reset" name="reset" />
-      </form>
-    </div>
-    <div class="player-container">
-      <p class="player-name">{{table.player.name}}</p>
-      <p class="player-br_balance">{{table.player.br.balance}}</p>
-      <div class="player-hands-container">
-        {% for hand in table.player.hands %} {% if hand.cards|length > 0 %}
+      <div class="dealer-container">
         <div class="hand-container">
-          {% for card in hand.cards %}
+          {% for card in table.dealer.hand.cards %} {% if card.is_face_down %}
+          <card-t rank="0" backtext=" "></card-t>
+          {% else %}
           <card-t
             rank="{{ card.rank.name|lower }}"
             suit="{{ card.suit.name|lower }}"
           ></card-t>
-          {% endfor %}
+          {% endif %} {% endfor %}
         </div>
-        <div class="player-actions">
-          <form method="post">
-            <input type="submit" value="Hit" name="hit" />
-            <input type="hidden" value="{{loop.index}}" name="hand_index" />
-          </form>
+      </div>
+      <div class="player-container">
+        <p class="player-name">{{table.player.name}}</p>
+        <p class="player-br_balance">{{table.player.br.balance}}</p>
+        <div class="player-hands-container">
+          {% for hand in table.player.hands %} {% if hand.cards|length > 0 %}
+          <p>{{ hand.best_value }}</p>
+          <div class="hand-container">
+            {% for card in hand.cards %}
+            <card-t
+              rank="{{ card.rank.name|lower }}"
+              suit="{{ card.suit.name|lower }}"
+            ></card-t>
+            {% endfor %}
+          </div>
+          <div class="player-actions">
+            <form method="post">
+              <input type="submit" value="Hit" name="hit" {{'disabled' if
+              hand.best_value > 21}}/>
+              <input type="hidden" value="{{loop.index}}" name="hand_index" />
+            </form>
+          </div>
+          {% endif %} {% endfor %}
         </div>
-        {% endif %} {% endfor %}
       </div>
     </div>
   </body>

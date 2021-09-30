@@ -6,7 +6,7 @@ $itemsCount: 52 * 7;
   margin: auto;
 }
 
-.shoe-container > card-t {
+.shoe-container > .shoe-cards > card-t {
   position: absolute;
   width: 250px;
   height: 300px;
@@ -22,11 +22,17 @@ $itemsCount: 52 * 7;
     }
   }
 }
-
+.table-action {
+  text-align: center;
+}
+.dealer-container {
+  width: 90%;
+  margin: 10px auto;
+}
 .player-container {
-  width: 600px;
+  width: 90%;
   height: 400px;
-  margin: auto;
+  margin: 20px auto;
   position: relative;
   text-align: center;
 }
