@@ -1,40 +1,25 @@
 from typing import List
 
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, g, render_template, request
 
-from models.table import BlackjackTable
 from models.player import Player
+from models.table import BlackjackTable
 
 app = Flask(__name__)
 app.config.from_object('config')
-
-TABLES = [
-    BlackjackTable(id=1),
-    BlackjackTable(id=2),
-]
+app.secret_key = "BAD_SECRET_KEY"
 
 
-def get_table(table_id: int, tables: List[BlackjackTable]):
-    for table in tables:
-        if table.id == table_id:
-            return table
+# @app.route('/_test_ajax')
+# def add_numbers():
+#     a = request.args.get('a', 0, type=int)
+#     b = request.args.get('b', 0, type=int)
+#     return jsonify(result=a + b)
 
 
-@app.route('/')
-def hello():
-    return 'Hello World!'
-
-
-# @app.route('/table/')
-# @app.route('/table/<table_id>')
-# def table(table_id: int = None):
-#     print(table_id)
-#     if table_id:
-#         table = get_table(table_id, TABLES)
-#         if table:
-#             return render_template('table_id.html', table=table)
-#         # return redirect(url_for('table'))
-#     return render_template('table.html')
+# @app.route('/test_ajax')
+# def test_ajax_index():
+#     return render_template('test_ajax.html')
 
 
 @app.route('/basic_strategy/')
@@ -42,12 +27,38 @@ def basic_strategy_index():
     """Page explaining basic strategy"""
     pass
 
-@app.route('/basic_strategy/playing')
+
+single_player_table = None
+
+
+@app.route('/basic_strategy/playing', methods=['GET', 'POST'])
 def basic_strategy_playing():
     """Playing basic strategy"""
-    table = BlackjackTable(n_decks=1)
-    player = Player("Anon", br_balance=1000)
-    table.add_player(player)
-    player.hit(table.shoe.pop())
-    player.hit(table.shoe.pop())
-    return render_template('playing_basic_strategy.html', table=table, player=player)
+    global single_player_table
+    if not single_player_table:
+        single_player_table = _create_single_player_table()
+
+    if request.method == 'POST':
+        if request.form.get("hand_index"):
+            hand_index = int(request.form.get("hand_index")) - 1
+
+            if "hit" in request.form:
+                print("hitting...")
+                print(f"hand_index:{hand_index}")
+                single_player_table.player.hit(
+                    single_player_table.shoe.pop(), hand_index)
+
+        if "deal" in request.form:
+            single_player_table.deal_everyone()
+
+        if "reset" in request.form:
+            single_player_table.reset()
+
+    return render_template('playing_basic_strategy.html', table=single_player_table)
+
+
+def _create_single_player_table(n_decks: int = 1):
+    print("No table existing in g, creating a new one...")
+    table = BlackjackTable(n_decks=n_decks)
+    table.add_player(Player("Anon", br_balance=1000))
+    return table

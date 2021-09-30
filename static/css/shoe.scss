@@ -1,32 +1,42 @@
 $itemsCount: 52;
 .shoe-container {
-    position: relative;
-    width: 250px;
-    height: 300px;
-    margin: auto;
+  position: relative;
+  width: 250px;
+  height: 300px;
+  margin: auto;
 }
 
-.shoe-container>card-t {
-    position: absolute;
-    width: 250px;
-    height: 300px;
-    box-sizing: border-box;
-    padding: 40px;
-    @for $i from 1 through $itemsCount {
-        $zIndexStartValue: $itemsCount + 1; // we don't want an item with 0 index
-        $xValue: ($i - 1) * 0.5px; // we want to start translating from 0
-        $yValue: ($i - 1) * 0.5px; // we want to start translating from 0
-        $zIndexValue: $itemsCount - $i; // reverse the z-index, so first item is on top
-        &:nth-of-type(#{$i}) {
-            z-index: $zIndexValue;
-            transform: translateX(#{$xValue}) translateY(#{$yValue});
-        }
+.shoe-container > card-t {
+  position: absolute;
+  width: 250px;
+  height: 300px;
+  box-sizing: border-box;
+  padding: 40px;
+  @for $i from 1 through $itemsCount {
+    $zIndexStartValue: $itemsCount + 1; // we don't want an item with 0 index
+    $xValue: ($i - 1) * 0.5px; // we want to start translating from 0
+    $yValue: ($i - 1) * 0.5px; // we want to start translating from 0
+    $zIndexValue: $itemsCount -
+      $i; // reverse the z-index, so first item is on top
+    &:nth-of-type(#{$i}) {
+      z-index: $zIndexValue;
+      transform: translateX(#{$xValue}) translateY(#{$yValue});
     }
+  }
 }
 
 .player-container {
-    width: 600px;
-    height: 400px;
-    margin: auto;
-    position: relative;
+  width: 600px;
+  height: 400px;
+  margin: auto;
+  position: relative;
+  text-align: center;
+}
+
+.hand-container {
+  width: 350px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: auto;
 }

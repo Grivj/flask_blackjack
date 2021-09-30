@@ -331,5 +331,16 @@
   height: 400px;
   margin: auto;
   position: relative;
+  text-align: center;
+}
+
+.hand-container {
+  width: 350px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: auto;
 }
 /*# sourceMappingURL=shoe.css.map */

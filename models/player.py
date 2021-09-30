@@ -36,11 +36,11 @@ class Player:
     def stand(self):
         """TODO:implement"""
 
-    def hit(self, card: Card, hand: Hand = None):
-        if hand:
-            if hand not in Hand:
+    def hit(self, card: Card, hand_index: int = None):
+        if hand_index:
+            if self.hands[hand_index]:
                 raise IndexError(f"{self} does not have this hand")
-            hand.add(card)
+            self.hands[hand_index].add(card)
 
         self.hand.add(card)
 
@@ -52,3 +52,18 @@ class Player:
 
     def __str__(self):
         return self.name
+
+
+@dataclass
+class Dealer:
+    hand: Hand = Hand()
+
+    def hit(self, card: Card):
+        if not self.should_hit():
+            raise ValueError(
+                f"The dealer should stay. (hand value: {self.hand.value})")
+        self.hand.add(card)
+
+    def should_hit(self):
+        """The dealer should hit if his hand value < 17, else, should stand"""
+        return self.hand.value < 17 or len(self.hand) < 2
