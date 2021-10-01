@@ -7,63 +7,89 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static', filename='css/shoe.css') }}"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
     />
 
     <title>Document</title>
   </head>
 
   <body>
-    <div class="table-container">
-      <div class="shoe-container">
-        <div class="shoe-cards">
-          {% for card in table.shoe.cards %}
-          <card-t rank="0" backtext="{{ table.shoe|length }}"></card-t>
-          {% endfor %}
-        </div>
-      </div>
-      <div class="table-action">
-        <form method="post">
-          <input type="submit" value="Deal" name="deal" {{'disabled' if
-          table.dealt}}/>
-          <input type="submit" value="Reset" name="reset" />
-        </form>
-      </div>
-
-      <div class="dealer-container">
-        <div class="hand-container">
-          {% for card in table.dealer.hand.cards %} {% if card.is_face_down %}
-          <card-t rank="0" backtext=" "></card-t>
-          {% else %}
-          <card-t
-            rank="{{ card.rank.name|lower }}"
-            suit="{{ card.suit.name|lower }}"
-          ></card-t>
-          {% endif %} {% endfor %}
-        </div>
-      </div>
+    <div class="container">
       <div class="player-container">
-        <p class="player-name">{{table.player.name}}</p>
-        <p class="player-br_balance">{{table.player.br.balance}}</p>
-        <div class="player-hands-container">
-          {% for hand in table.player.hands %} {% if hand.cards|length > 0 %}
-          <p>{{ hand.best_value }}</p>
-          <div class="hand-container">
-            {% for card in hand.cards %}
-            <card-t
-              rank="{{ card.rank.name|lower }}"
-              suit="{{ card.suit.name|lower }}"
-            ></card-t>
+        {% for hand in table.player.hands %}
+        <div class="player-hand-container">
+          <div class="hand-cards">
+            {% for card in table.player.hand.cards %} {% set card_path =
+            'cards/'+card.rank.name|lower+'_'+card.suit.name|lower+'.svg' %}
+            <img
+              class="card"
+              src="{{ url_for('static', filename=card_path) }}"
+            />
             {% endfor %}
           </div>
-          <div class="player-actions">
-            <form method="post">
-              <input type="submit" value="Hit" name="hit" {{'disabled' if
-              hand.best_value > 21}}/>
-              <input type="hidden" value="{{loop.index}}" name="hand_index" />
-            </form>
+          {% if hand.cards %}
+          <p class="hand-value">
+            {% if hand.is_blackjack() %} blackjack! {% else %} {% if
+            hand.is_busted() %} busted! {% else %} {{hand.best_value}} {% endif
+            %} {% endif %}
+          </p>
+          {% endif %}
+          <form class="player-actions" method="post">
+            {% if hand.cards %}
+            <input type="submit" value="stand" name="stand" />
+            {% if not hand.is_busted() and not hand.is_blackjack() %}
+            <input type="submit" value="hit" name="hit" />
+            {% endif %}
+
+            <input type="submit" value="split" name="split" />
+            <input type="submit" value="double" name="double" />
+            <input type="hidden" value="{{loop.index}}" name="hand_index" />
+            {% else %}
+            <p>Wait for the dealer to deal</p>
+            {% endif %}
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="deck-dealer-container">
+        <div class="deck-container">
+          {% for card in table.shoe.cards %}
+          <img
+            class="card"
+            src="{{ url_for('static', filename='cards/reversed.svg') }}"
+          />
+          {% endfor %}
+        </div>
+        <form class="table-actions" method="POST">
+          {% if not table.dealt %}
+          <input type="submit" value="deal" name="deal" />
+          {% endif %}
+          <input type="submit" value="reset" name="reset" />
+        </form>
+        <div class="dealer-container">
+          <div class="player-hand-container">
+            <div class="hand-cards">
+              {% for card in table.dealer.hand.cards %} {% if card.is_face_down
+              %}
+              <img
+                class="card"
+                src="{{ url_for('static', filename='cards/reversed.svg') }}"
+              />
+              {% else %} {% set card_path =
+              'cards/'+card.rank.name|lower+'_'+card.suit.name|lower+'.svg' %}
+              <img
+                class="card"
+                src="{{ url_for('static', filename=card_path) }}"
+              />
+              {% endif %} {% endfor %}
+            </div>
           </div>
-          {% endif %} {% endfor %}
         </div>
       </div>
     </div>

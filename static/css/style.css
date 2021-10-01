@@ -1,2238 +1,2441 @@
-.shoe-container {
-  position: relative;
-  width: 250px;
-  height: 300px;
-  margin: auto;
+body {
+  background: -webkit-gradient(linear, left top, left bottom, from(#0ba360), to(#3cba92));
+  background: linear-gradient(180deg, #0ba360 0%, #3cba92 100%);
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
 }
 
-.shoe-container > .card {
+.player-container > .player-hand-container {
+  position: static;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  -ms-flex-positive: 0;
+      flex-grow: 0;
+}
+
+.hand-cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0px;
+  gap: 20px;
+}
+
+p.hand-value {
+  font-weight: bold;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  color: #f9e282;
+  text-transform: uppercase;
+}
+
+.player-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: rgba(0, 117, 161, 0.2);
+  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  margin: 20px auto;
+  width: 600px;
+}
+
+.player-actions > input {
+  cursor: pointer;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  -webkit-box-ordinal-group: 1;
+      -ms-flex-order: 0;
+          order: 0;
+  -ms-flex-positive: 0;
+      flex-grow: 0;
+  margin: 3px;
+  width: 100px;
+  height: 44px;
+  background: rgba(26, 25, 25, 0.1);
+  border-radius: 20px;
+  border: none;
+}
+
+.player-actions > input:hover {
+  background: rgba(26, 25, 25, 0.3);
+  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  cursor: pointer;
+  height: 280px;
+  width: 200px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+.card:hover {
+  -webkit-box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.table-container {
+  background: rgba(0, 117, 161, 0.1);
+  border-radius: 20px;
+  padding: 5%;
+  height: -webkit-fill-available;
+  width: 50%;
+}
+
+.container {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-columns: 1fr;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+      grid-template-areas: "player-container deck-dealer-container" "player-container deck-dealer-container";
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+}
+
+.player-container {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: player-container;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 5%;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+}
+
+.deck-dealer-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: 1fr 50px 1fr;
+      grid-template-rows: 1fr 50px 1fr;
+  gap: 0px 0px;
+      grid-template-areas: "deck-container" "table-actions" "dealer-container";
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 2;
+  grid-area: deck-dealer-container;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  background: rgba(0, 117, 161, 0.1);
+  border-radius: 40px;
+}
+
+.deck-container {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: deck-container;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dealer-container {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: dealer-container;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.table-actions {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: table-actions;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.table-actions > input {
+  cursor: pointer;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  -webkit-box-ordinal-group: 1;
+      -ms-flex-order: 0;
+          order: 0;
+  -ms-flex-positive: 0;
+      flex-grow: 0;
+  margin: 3px;
+  width: 100px;
+  height: 44px;
+  background: rgba(26, 25, 25, 0.1);
+  border-radius: 20px;
+  border: none;
+}
+
+.table-actions > input:hover {
+  background: rgba(26, 25, 25, 0.3);
+  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.deck-container > .card {
   position: absolute;
+  -webkit-box-shadow: 0 0;
+          box-shadow: 0 0;
 }
 
-.shoe-container > .card:nth-of-type(1) {
+.deck-container > .card:nth-of-type(1) {
   z-index: 1;
   -webkit-transform: translateX(0px) translateY(0px);
           transform: translateX(0px) translateY(0px);
 }
 
-.shoe-container > .card:nth-of-type(2) {
+.deck-container > .card:nth-of-type(2) {
   z-index: 2;
   -webkit-transform: translateX(-0.4px) translateY(-0.4px);
           transform: translateX(-0.4px) translateY(-0.4px);
 }
 
-.shoe-container > .card:nth-of-type(3) {
+.deck-container > .card:nth-of-type(3) {
   z-index: 3;
   -webkit-transform: translateX(-0.8px) translateY(-0.8px);
           transform: translateX(-0.8px) translateY(-0.8px);
 }
 
-.shoe-container > .card:nth-of-type(4) {
+.deck-container > .card:nth-of-type(4) {
   z-index: 4;
   -webkit-transform: translateX(-1.2px) translateY(-1.2px);
           transform: translateX(-1.2px) translateY(-1.2px);
 }
 
-.shoe-container > .card:nth-of-type(5) {
+.deck-container > .card:nth-of-type(5) {
   z-index: 5;
   -webkit-transform: translateX(-1.6px) translateY(-1.6px);
           transform: translateX(-1.6px) translateY(-1.6px);
 }
 
-.shoe-container > .card:nth-of-type(6) {
+.deck-container > .card:nth-of-type(6) {
   z-index: 6;
   -webkit-transform: translateX(-2px) translateY(-2px);
           transform: translateX(-2px) translateY(-2px);
 }
 
-.shoe-container > .card:nth-of-type(7) {
+.deck-container > .card:nth-of-type(7) {
   z-index: 7;
   -webkit-transform: translateX(-2.4px) translateY(-2.4px);
           transform: translateX(-2.4px) translateY(-2.4px);
 }
 
-.shoe-container > .card:nth-of-type(8) {
+.deck-container > .card:nth-of-type(8) {
   z-index: 8;
   -webkit-transform: translateX(-2.8px) translateY(-2.8px);
           transform: translateX(-2.8px) translateY(-2.8px);
 }
 
-.shoe-container > .card:nth-of-type(9) {
+.deck-container > .card:nth-of-type(9) {
   z-index: 9;
   -webkit-transform: translateX(-3.2px) translateY(-3.2px);
           transform: translateX(-3.2px) translateY(-3.2px);
 }
 
-.shoe-container > .card:nth-of-type(10) {
+.deck-container > .card:nth-of-type(10) {
   z-index: 10;
   -webkit-transform: translateX(-3.6px) translateY(-3.6px);
           transform: translateX(-3.6px) translateY(-3.6px);
 }
 
-.shoe-container > .card:nth-of-type(11) {
+.deck-container > .card:nth-of-type(11) {
   z-index: 11;
   -webkit-transform: translateX(-4px) translateY(-4px);
           transform: translateX(-4px) translateY(-4px);
 }
 
-.shoe-container > .card:nth-of-type(12) {
+.deck-container > .card:nth-of-type(12) {
   z-index: 12;
   -webkit-transform: translateX(-4.4px) translateY(-4.4px);
           transform: translateX(-4.4px) translateY(-4.4px);
 }
 
-.shoe-container > .card:nth-of-type(13) {
+.deck-container > .card:nth-of-type(13) {
   z-index: 13;
   -webkit-transform: translateX(-4.8px) translateY(-4.8px);
           transform: translateX(-4.8px) translateY(-4.8px);
 }
 
-.shoe-container > .card:nth-of-type(14) {
+.deck-container > .card:nth-of-type(14) {
   z-index: 14;
   -webkit-transform: translateX(-5.2px) translateY(-5.2px);
           transform: translateX(-5.2px) translateY(-5.2px);
 }
 
-.shoe-container > .card:nth-of-type(15) {
+.deck-container > .card:nth-of-type(15) {
   z-index: 15;
   -webkit-transform: translateX(-5.6px) translateY(-5.6px);
           transform: translateX(-5.6px) translateY(-5.6px);
 }
 
-.shoe-container > .card:nth-of-type(16) {
+.deck-container > .card:nth-of-type(16) {
   z-index: 16;
   -webkit-transform: translateX(-6px) translateY(-6px);
           transform: translateX(-6px) translateY(-6px);
 }
 
-.shoe-container > .card:nth-of-type(17) {
+.deck-container > .card:nth-of-type(17) {
   z-index: 17;
   -webkit-transform: translateX(-6.4px) translateY(-6.4px);
           transform: translateX(-6.4px) translateY(-6.4px);
 }
 
-.shoe-container > .card:nth-of-type(18) {
+.deck-container > .card:nth-of-type(18) {
   z-index: 18;
   -webkit-transform: translateX(-6.8px) translateY(-6.8px);
           transform: translateX(-6.8px) translateY(-6.8px);
 }
 
-.shoe-container > .card:nth-of-type(19) {
+.deck-container > .card:nth-of-type(19) {
   z-index: 19;
   -webkit-transform: translateX(-7.2px) translateY(-7.2px);
           transform: translateX(-7.2px) translateY(-7.2px);
 }
 
-.shoe-container > .card:nth-of-type(20) {
+.deck-container > .card:nth-of-type(20) {
   z-index: 20;
   -webkit-transform: translateX(-7.6px) translateY(-7.6px);
           transform: translateX(-7.6px) translateY(-7.6px);
 }
 
-.shoe-container > .card:nth-of-type(21) {
+.deck-container > .card:nth-of-type(21) {
   z-index: 21;
   -webkit-transform: translateX(-8px) translateY(-8px);
           transform: translateX(-8px) translateY(-8px);
 }
 
-.shoe-container > .card:nth-of-type(22) {
+.deck-container > .card:nth-of-type(22) {
   z-index: 22;
   -webkit-transform: translateX(-8.4px) translateY(-8.4px);
           transform: translateX(-8.4px) translateY(-8.4px);
 }
 
-.shoe-container > .card:nth-of-type(23) {
+.deck-container > .card:nth-of-type(23) {
   z-index: 23;
   -webkit-transform: translateX(-8.8px) translateY(-8.8px);
           transform: translateX(-8.8px) translateY(-8.8px);
 }
 
-.shoe-container > .card:nth-of-type(24) {
+.deck-container > .card:nth-of-type(24) {
   z-index: 24;
   -webkit-transform: translateX(-9.2px) translateY(-9.2px);
           transform: translateX(-9.2px) translateY(-9.2px);
 }
 
-.shoe-container > .card:nth-of-type(25) {
+.deck-container > .card:nth-of-type(25) {
   z-index: 25;
   -webkit-transform: translateX(-9.6px) translateY(-9.6px);
           transform: translateX(-9.6px) translateY(-9.6px);
 }
 
-.shoe-container > .card:nth-of-type(26) {
+.deck-container > .card:nth-of-type(26) {
   z-index: 26;
   -webkit-transform: translateX(-10px) translateY(-10px);
           transform: translateX(-10px) translateY(-10px);
 }
 
-.shoe-container > .card:nth-of-type(27) {
+.deck-container > .card:nth-of-type(27) {
   z-index: 27;
   -webkit-transform: translateX(-10.4px) translateY(-10.4px);
           transform: translateX(-10.4px) translateY(-10.4px);
 }
 
-.shoe-container > .card:nth-of-type(28) {
+.deck-container > .card:nth-of-type(28) {
   z-index: 28;
   -webkit-transform: translateX(-10.8px) translateY(-10.8px);
           transform: translateX(-10.8px) translateY(-10.8px);
 }
 
-.shoe-container > .card:nth-of-type(29) {
+.deck-container > .card:nth-of-type(29) {
   z-index: 29;
   -webkit-transform: translateX(-11.2px) translateY(-11.2px);
           transform: translateX(-11.2px) translateY(-11.2px);
 }
 
-.shoe-container > .card:nth-of-type(30) {
+.deck-container > .card:nth-of-type(30) {
   z-index: 30;
   -webkit-transform: translateX(-11.6px) translateY(-11.6px);
           transform: translateX(-11.6px) translateY(-11.6px);
 }
 
-.shoe-container > .card:nth-of-type(31) {
+.deck-container > .card:nth-of-type(31) {
   z-index: 31;
   -webkit-transform: translateX(-12px) translateY(-12px);
           transform: translateX(-12px) translateY(-12px);
 }
 
-.shoe-container > .card:nth-of-type(32) {
+.deck-container > .card:nth-of-type(32) {
   z-index: 32;
   -webkit-transform: translateX(-12.4px) translateY(-12.4px);
           transform: translateX(-12.4px) translateY(-12.4px);
 }
 
-.shoe-container > .card:nth-of-type(33) {
+.deck-container > .card:nth-of-type(33) {
   z-index: 33;
   -webkit-transform: translateX(-12.8px) translateY(-12.8px);
           transform: translateX(-12.8px) translateY(-12.8px);
 }
 
-.shoe-container > .card:nth-of-type(34) {
+.deck-container > .card:nth-of-type(34) {
   z-index: 34;
   -webkit-transform: translateX(-13.2px) translateY(-13.2px);
           transform: translateX(-13.2px) translateY(-13.2px);
 }
 
-.shoe-container > .card:nth-of-type(35) {
+.deck-container > .card:nth-of-type(35) {
   z-index: 35;
   -webkit-transform: translateX(-13.6px) translateY(-13.6px);
           transform: translateX(-13.6px) translateY(-13.6px);
 }
 
-.shoe-container > .card:nth-of-type(36) {
+.deck-container > .card:nth-of-type(36) {
   z-index: 36;
   -webkit-transform: translateX(-14px) translateY(-14px);
           transform: translateX(-14px) translateY(-14px);
 }
 
-.shoe-container > .card:nth-of-type(37) {
+.deck-container > .card:nth-of-type(37) {
   z-index: 37;
   -webkit-transform: translateX(-14.4px) translateY(-14.4px);
           transform: translateX(-14.4px) translateY(-14.4px);
 }
 
-.shoe-container > .card:nth-of-type(38) {
+.deck-container > .card:nth-of-type(38) {
   z-index: 38;
   -webkit-transform: translateX(-14.8px) translateY(-14.8px);
           transform: translateX(-14.8px) translateY(-14.8px);
 }
 
-.shoe-container > .card:nth-of-type(39) {
+.deck-container > .card:nth-of-type(39) {
   z-index: 39;
   -webkit-transform: translateX(-15.2px) translateY(-15.2px);
           transform: translateX(-15.2px) translateY(-15.2px);
 }
 
-.shoe-container > .card:nth-of-type(40) {
+.deck-container > .card:nth-of-type(40) {
   z-index: 40;
   -webkit-transform: translateX(-15.6px) translateY(-15.6px);
           transform: translateX(-15.6px) translateY(-15.6px);
 }
 
-.shoe-container > .card:nth-of-type(41) {
+.deck-container > .card:nth-of-type(41) {
   z-index: 41;
   -webkit-transform: translateX(-16px) translateY(-16px);
           transform: translateX(-16px) translateY(-16px);
 }
 
-.shoe-container > .card:nth-of-type(42) {
+.deck-container > .card:nth-of-type(42) {
   z-index: 42;
   -webkit-transform: translateX(-16.4px) translateY(-16.4px);
           transform: translateX(-16.4px) translateY(-16.4px);
 }
 
-.shoe-container > .card:nth-of-type(43) {
+.deck-container > .card:nth-of-type(43) {
   z-index: 43;
   -webkit-transform: translateX(-16.8px) translateY(-16.8px);
           transform: translateX(-16.8px) translateY(-16.8px);
 }
 
-.shoe-container > .card:nth-of-type(44) {
+.deck-container > .card:nth-of-type(44) {
   z-index: 44;
   -webkit-transform: translateX(-17.2px) translateY(-17.2px);
           transform: translateX(-17.2px) translateY(-17.2px);
 }
 
-.shoe-container > .card:nth-of-type(45) {
+.deck-container > .card:nth-of-type(45) {
   z-index: 45;
   -webkit-transform: translateX(-17.6px) translateY(-17.6px);
           transform: translateX(-17.6px) translateY(-17.6px);
 }
 
-.shoe-container > .card:nth-of-type(46) {
+.deck-container > .card:nth-of-type(46) {
   z-index: 46;
   -webkit-transform: translateX(-18px) translateY(-18px);
           transform: translateX(-18px) translateY(-18px);
 }
 
-.shoe-container > .card:nth-of-type(47) {
+.deck-container > .card:nth-of-type(47) {
   z-index: 47;
   -webkit-transform: translateX(-18.4px) translateY(-18.4px);
           transform: translateX(-18.4px) translateY(-18.4px);
 }
 
-.shoe-container > .card:nth-of-type(48) {
+.deck-container > .card:nth-of-type(48) {
   z-index: 48;
   -webkit-transform: translateX(-18.8px) translateY(-18.8px);
           transform: translateX(-18.8px) translateY(-18.8px);
 }
 
-.shoe-container > .card:nth-of-type(49) {
+.deck-container > .card:nth-of-type(49) {
   z-index: 49;
   -webkit-transform: translateX(-19.2px) translateY(-19.2px);
           transform: translateX(-19.2px) translateY(-19.2px);
 }
 
-.shoe-container > .card:nth-of-type(50) {
+.deck-container > .card:nth-of-type(50) {
   z-index: 50;
   -webkit-transform: translateX(-19.6px) translateY(-19.6px);
           transform: translateX(-19.6px) translateY(-19.6px);
 }
 
-.shoe-container > .card:nth-of-type(51) {
+.deck-container > .card:nth-of-type(51) {
   z-index: 51;
   -webkit-transform: translateX(-20px) translateY(-20px);
           transform: translateX(-20px) translateY(-20px);
 }
 
-.shoe-container > .card:nth-of-type(52) {
+.deck-container > .card:nth-of-type(52) {
   z-index: 52;
   -webkit-transform: translateX(-20.4px) translateY(-20.4px);
           transform: translateX(-20.4px) translateY(-20.4px);
 }
 
-.shoe-container > .card:nth-of-type(53) {
+.deck-container > .card:nth-of-type(53) {
   z-index: 53;
   -webkit-transform: translateX(-20.8px) translateY(-20.8px);
           transform: translateX(-20.8px) translateY(-20.8px);
 }
 
-.shoe-container > .card:nth-of-type(54) {
+.deck-container > .card:nth-of-type(54) {
   z-index: 54;
   -webkit-transform: translateX(-21.2px) translateY(-21.2px);
           transform: translateX(-21.2px) translateY(-21.2px);
 }
 
-.shoe-container > .card:nth-of-type(55) {
+.deck-container > .card:nth-of-type(55) {
   z-index: 55;
   -webkit-transform: translateX(-21.6px) translateY(-21.6px);
           transform: translateX(-21.6px) translateY(-21.6px);
 }
 
-.shoe-container > .card:nth-of-type(56) {
+.deck-container > .card:nth-of-type(56) {
   z-index: 56;
   -webkit-transform: translateX(-22px) translateY(-22px);
           transform: translateX(-22px) translateY(-22px);
 }
 
-.shoe-container > .card:nth-of-type(57) {
+.deck-container > .card:nth-of-type(57) {
   z-index: 57;
   -webkit-transform: translateX(-22.4px) translateY(-22.4px);
           transform: translateX(-22.4px) translateY(-22.4px);
 }
 
-.shoe-container > .card:nth-of-type(58) {
+.deck-container > .card:nth-of-type(58) {
   z-index: 58;
   -webkit-transform: translateX(-22.8px) translateY(-22.8px);
           transform: translateX(-22.8px) translateY(-22.8px);
 }
 
-.shoe-container > .card:nth-of-type(59) {
+.deck-container > .card:nth-of-type(59) {
   z-index: 59;
   -webkit-transform: translateX(-23.2px) translateY(-23.2px);
           transform: translateX(-23.2px) translateY(-23.2px);
 }
 
-.shoe-container > .card:nth-of-type(60) {
+.deck-container > .card:nth-of-type(60) {
   z-index: 60;
   -webkit-transform: translateX(-23.6px) translateY(-23.6px);
           transform: translateX(-23.6px) translateY(-23.6px);
 }
 
-.shoe-container > .card:nth-of-type(61) {
+.deck-container > .card:nth-of-type(61) {
   z-index: 61;
   -webkit-transform: translateX(-24px) translateY(-24px);
           transform: translateX(-24px) translateY(-24px);
 }
 
-.shoe-container > .card:nth-of-type(62) {
+.deck-container > .card:nth-of-type(62) {
   z-index: 62;
   -webkit-transform: translateX(-24.4px) translateY(-24.4px);
           transform: translateX(-24.4px) translateY(-24.4px);
 }
 
-.shoe-container > .card:nth-of-type(63) {
+.deck-container > .card:nth-of-type(63) {
   z-index: 63;
   -webkit-transform: translateX(-24.8px) translateY(-24.8px);
           transform: translateX(-24.8px) translateY(-24.8px);
 }
 
-.shoe-container > .card:nth-of-type(64) {
+.deck-container > .card:nth-of-type(64) {
   z-index: 64;
   -webkit-transform: translateX(-25.2px) translateY(-25.2px);
           transform: translateX(-25.2px) translateY(-25.2px);
 }
 
-.shoe-container > .card:nth-of-type(65) {
+.deck-container > .card:nth-of-type(65) {
   z-index: 65;
   -webkit-transform: translateX(-25.6px) translateY(-25.6px);
           transform: translateX(-25.6px) translateY(-25.6px);
 }
 
-.shoe-container > .card:nth-of-type(66) {
+.deck-container > .card:nth-of-type(66) {
   z-index: 66;
   -webkit-transform: translateX(-26px) translateY(-26px);
           transform: translateX(-26px) translateY(-26px);
 }
 
-.shoe-container > .card:nth-of-type(67) {
+.deck-container > .card:nth-of-type(67) {
   z-index: 67;
   -webkit-transform: translateX(-26.4px) translateY(-26.4px);
           transform: translateX(-26.4px) translateY(-26.4px);
 }
 
-.shoe-container > .card:nth-of-type(68) {
+.deck-container > .card:nth-of-type(68) {
   z-index: 68;
   -webkit-transform: translateX(-26.8px) translateY(-26.8px);
           transform: translateX(-26.8px) translateY(-26.8px);
 }
 
-.shoe-container > .card:nth-of-type(69) {
+.deck-container > .card:nth-of-type(69) {
   z-index: 69;
   -webkit-transform: translateX(-27.2px) translateY(-27.2px);
           transform: translateX(-27.2px) translateY(-27.2px);
 }
 
-.shoe-container > .card:nth-of-type(70) {
+.deck-container > .card:nth-of-type(70) {
   z-index: 70;
   -webkit-transform: translateX(-27.6px) translateY(-27.6px);
           transform: translateX(-27.6px) translateY(-27.6px);
 }
 
-.shoe-container > .card:nth-of-type(71) {
+.deck-container > .card:nth-of-type(71) {
   z-index: 71;
   -webkit-transform: translateX(-28px) translateY(-28px);
           transform: translateX(-28px) translateY(-28px);
 }
 
-.shoe-container > .card:nth-of-type(72) {
+.deck-container > .card:nth-of-type(72) {
   z-index: 72;
   -webkit-transform: translateX(-28.4px) translateY(-28.4px);
           transform: translateX(-28.4px) translateY(-28.4px);
 }
 
-.shoe-container > .card:nth-of-type(73) {
+.deck-container > .card:nth-of-type(73) {
   z-index: 73;
   -webkit-transform: translateX(-28.8px) translateY(-28.8px);
           transform: translateX(-28.8px) translateY(-28.8px);
 }
 
-.shoe-container > .card:nth-of-type(74) {
+.deck-container > .card:nth-of-type(74) {
   z-index: 74;
   -webkit-transform: translateX(-29.2px) translateY(-29.2px);
           transform: translateX(-29.2px) translateY(-29.2px);
 }
 
-.shoe-container > .card:nth-of-type(75) {
+.deck-container > .card:nth-of-type(75) {
   z-index: 75;
   -webkit-transform: translateX(-29.6px) translateY(-29.6px);
           transform: translateX(-29.6px) translateY(-29.6px);
 }
 
-.shoe-container > .card:nth-of-type(76) {
+.deck-container > .card:nth-of-type(76) {
   z-index: 76;
   -webkit-transform: translateX(-30px) translateY(-30px);
           transform: translateX(-30px) translateY(-30px);
 }
 
-.shoe-container > .card:nth-of-type(77) {
+.deck-container > .card:nth-of-type(77) {
   z-index: 77;
   -webkit-transform: translateX(-30.4px) translateY(-30.4px);
           transform: translateX(-30.4px) translateY(-30.4px);
 }
 
-.shoe-container > .card:nth-of-type(78) {
+.deck-container > .card:nth-of-type(78) {
   z-index: 78;
   -webkit-transform: translateX(-30.8px) translateY(-30.8px);
           transform: translateX(-30.8px) translateY(-30.8px);
 }
 
-.shoe-container > .card:nth-of-type(79) {
+.deck-container > .card:nth-of-type(79) {
   z-index: 79;
   -webkit-transform: translateX(-31.2px) translateY(-31.2px);
           transform: translateX(-31.2px) translateY(-31.2px);
 }
 
-.shoe-container > .card:nth-of-type(80) {
+.deck-container > .card:nth-of-type(80) {
   z-index: 80;
   -webkit-transform: translateX(-31.6px) translateY(-31.6px);
           transform: translateX(-31.6px) translateY(-31.6px);
 }
 
-.shoe-container > .card:nth-of-type(81) {
+.deck-container > .card:nth-of-type(81) {
   z-index: 81;
   -webkit-transform: translateX(-32px) translateY(-32px);
           transform: translateX(-32px) translateY(-32px);
 }
 
-.shoe-container > .card:nth-of-type(82) {
+.deck-container > .card:nth-of-type(82) {
   z-index: 82;
   -webkit-transform: translateX(-32.4px) translateY(-32.4px);
           transform: translateX(-32.4px) translateY(-32.4px);
 }
 
-.shoe-container > .card:nth-of-type(83) {
+.deck-container > .card:nth-of-type(83) {
   z-index: 83;
   -webkit-transform: translateX(-32.8px) translateY(-32.8px);
           transform: translateX(-32.8px) translateY(-32.8px);
 }
 
-.shoe-container > .card:nth-of-type(84) {
+.deck-container > .card:nth-of-type(84) {
   z-index: 84;
   -webkit-transform: translateX(-33.2px) translateY(-33.2px);
           transform: translateX(-33.2px) translateY(-33.2px);
 }
 
-.shoe-container > .card:nth-of-type(85) {
+.deck-container > .card:nth-of-type(85) {
   z-index: 85;
   -webkit-transform: translateX(-33.6px) translateY(-33.6px);
           transform: translateX(-33.6px) translateY(-33.6px);
 }
 
-.shoe-container > .card:nth-of-type(86) {
+.deck-container > .card:nth-of-type(86) {
   z-index: 86;
   -webkit-transform: translateX(-34px) translateY(-34px);
           transform: translateX(-34px) translateY(-34px);
 }
 
-.shoe-container > .card:nth-of-type(87) {
+.deck-container > .card:nth-of-type(87) {
   z-index: 87;
   -webkit-transform: translateX(-34.4px) translateY(-34.4px);
           transform: translateX(-34.4px) translateY(-34.4px);
 }
 
-.shoe-container > .card:nth-of-type(88) {
+.deck-container > .card:nth-of-type(88) {
   z-index: 88;
   -webkit-transform: translateX(-34.8px) translateY(-34.8px);
           transform: translateX(-34.8px) translateY(-34.8px);
 }
 
-.shoe-container > .card:nth-of-type(89) {
+.deck-container > .card:nth-of-type(89) {
   z-index: 89;
   -webkit-transform: translateX(-35.2px) translateY(-35.2px);
           transform: translateX(-35.2px) translateY(-35.2px);
 }
 
-.shoe-container > .card:nth-of-type(90) {
+.deck-container > .card:nth-of-type(90) {
   z-index: 90;
   -webkit-transform: translateX(-35.6px) translateY(-35.6px);
           transform: translateX(-35.6px) translateY(-35.6px);
 }
 
-.shoe-container > .card:nth-of-type(91) {
+.deck-container > .card:nth-of-type(91) {
   z-index: 91;
   -webkit-transform: translateX(-36px) translateY(-36px);
           transform: translateX(-36px) translateY(-36px);
 }
 
-.shoe-container > .card:nth-of-type(92) {
+.deck-container > .card:nth-of-type(92) {
   z-index: 92;
   -webkit-transform: translateX(-36.4px) translateY(-36.4px);
           transform: translateX(-36.4px) translateY(-36.4px);
 }
 
-.shoe-container > .card:nth-of-type(93) {
+.deck-container > .card:nth-of-type(93) {
   z-index: 93;
   -webkit-transform: translateX(-36.8px) translateY(-36.8px);
           transform: translateX(-36.8px) translateY(-36.8px);
 }
 
-.shoe-container > .card:nth-of-type(94) {
+.deck-container > .card:nth-of-type(94) {
   z-index: 94;
   -webkit-transform: translateX(-37.2px) translateY(-37.2px);
           transform: translateX(-37.2px) translateY(-37.2px);
 }
 
-.shoe-container > .card:nth-of-type(95) {
+.deck-container > .card:nth-of-type(95) {
   z-index: 95;
   -webkit-transform: translateX(-37.6px) translateY(-37.6px);
           transform: translateX(-37.6px) translateY(-37.6px);
 }
 
-.shoe-container > .card:nth-of-type(96) {
+.deck-container > .card:nth-of-type(96) {
   z-index: 96;
   -webkit-transform: translateX(-38px) translateY(-38px);
           transform: translateX(-38px) translateY(-38px);
 }
 
-.shoe-container > .card:nth-of-type(97) {
+.deck-container > .card:nth-of-type(97) {
   z-index: 97;
   -webkit-transform: translateX(-38.4px) translateY(-38.4px);
           transform: translateX(-38.4px) translateY(-38.4px);
 }
 
-.shoe-container > .card:nth-of-type(98) {
+.deck-container > .card:nth-of-type(98) {
   z-index: 98;
   -webkit-transform: translateX(-38.8px) translateY(-38.8px);
           transform: translateX(-38.8px) translateY(-38.8px);
 }
 
-.shoe-container > .card:nth-of-type(99) {
+.deck-container > .card:nth-of-type(99) {
   z-index: 99;
   -webkit-transform: translateX(-39.2px) translateY(-39.2px);
           transform: translateX(-39.2px) translateY(-39.2px);
 }
 
-.shoe-container > .card:nth-of-type(100) {
+.deck-container > .card:nth-of-type(100) {
   z-index: 100;
   -webkit-transform: translateX(-39.6px) translateY(-39.6px);
           transform: translateX(-39.6px) translateY(-39.6px);
 }
 
-.shoe-container > .card:nth-of-type(101) {
+.deck-container > .card:nth-of-type(101) {
   z-index: 101;
   -webkit-transform: translateX(-40px) translateY(-40px);
           transform: translateX(-40px) translateY(-40px);
 }
 
-.shoe-container > .card:nth-of-type(102) {
+.deck-container > .card:nth-of-type(102) {
   z-index: 102;
   -webkit-transform: translateX(-40.4px) translateY(-40.4px);
           transform: translateX(-40.4px) translateY(-40.4px);
 }
 
-.shoe-container > .card:nth-of-type(103) {
+.deck-container > .card:nth-of-type(103) {
   z-index: 103;
   -webkit-transform: translateX(-40.8px) translateY(-40.8px);
           transform: translateX(-40.8px) translateY(-40.8px);
 }
 
-.shoe-container > .card:nth-of-type(104) {
+.deck-container > .card:nth-of-type(104) {
   z-index: 104;
   -webkit-transform: translateX(-41.2px) translateY(-41.2px);
           transform: translateX(-41.2px) translateY(-41.2px);
 }
 
-.shoe-container > .card:nth-of-type(105) {
+.deck-container > .card:nth-of-type(105) {
   z-index: 105;
   -webkit-transform: translateX(-41.6px) translateY(-41.6px);
           transform: translateX(-41.6px) translateY(-41.6px);
 }
 
-.shoe-container > .card:nth-of-type(106) {
+.deck-container > .card:nth-of-type(106) {
   z-index: 106;
   -webkit-transform: translateX(-42px) translateY(-42px);
           transform: translateX(-42px) translateY(-42px);
 }
 
-.shoe-container > .card:nth-of-type(107) {
+.deck-container > .card:nth-of-type(107) {
   z-index: 107;
   -webkit-transform: translateX(-42.4px) translateY(-42.4px);
           transform: translateX(-42.4px) translateY(-42.4px);
 }
 
-.shoe-container > .card:nth-of-type(108) {
+.deck-container > .card:nth-of-type(108) {
   z-index: 108;
   -webkit-transform: translateX(-42.8px) translateY(-42.8px);
           transform: translateX(-42.8px) translateY(-42.8px);
 }
 
-.shoe-container > .card:nth-of-type(109) {
+.deck-container > .card:nth-of-type(109) {
   z-index: 109;
   -webkit-transform: translateX(-43.2px) translateY(-43.2px);
           transform: translateX(-43.2px) translateY(-43.2px);
 }
 
-.shoe-container > .card:nth-of-type(110) {
+.deck-container > .card:nth-of-type(110) {
   z-index: 110;
   -webkit-transform: translateX(-43.6px) translateY(-43.6px);
           transform: translateX(-43.6px) translateY(-43.6px);
 }
 
-.shoe-container > .card:nth-of-type(111) {
+.deck-container > .card:nth-of-type(111) {
   z-index: 111;
   -webkit-transform: translateX(-44px) translateY(-44px);
           transform: translateX(-44px) translateY(-44px);
 }
 
-.shoe-container > .card:nth-of-type(112) {
+.deck-container > .card:nth-of-type(112) {
   z-index: 112;
   -webkit-transform: translateX(-44.4px) translateY(-44.4px);
           transform: translateX(-44.4px) translateY(-44.4px);
 }
 
-.shoe-container > .card:nth-of-type(113) {
+.deck-container > .card:nth-of-type(113) {
   z-index: 113;
   -webkit-transform: translateX(-44.8px) translateY(-44.8px);
           transform: translateX(-44.8px) translateY(-44.8px);
 }
 
-.shoe-container > .card:nth-of-type(114) {
+.deck-container > .card:nth-of-type(114) {
   z-index: 114;
   -webkit-transform: translateX(-45.2px) translateY(-45.2px);
           transform: translateX(-45.2px) translateY(-45.2px);
 }
 
-.shoe-container > .card:nth-of-type(115) {
+.deck-container > .card:nth-of-type(115) {
   z-index: 115;
   -webkit-transform: translateX(-45.6px) translateY(-45.6px);
           transform: translateX(-45.6px) translateY(-45.6px);
 }
 
-.shoe-container > .card:nth-of-type(116) {
+.deck-container > .card:nth-of-type(116) {
   z-index: 116;
   -webkit-transform: translateX(-46px) translateY(-46px);
           transform: translateX(-46px) translateY(-46px);
 }
 
-.shoe-container > .card:nth-of-type(117) {
+.deck-container > .card:nth-of-type(117) {
   z-index: 117;
   -webkit-transform: translateX(-46.4px) translateY(-46.4px);
           transform: translateX(-46.4px) translateY(-46.4px);
 }
 
-.shoe-container > .card:nth-of-type(118) {
+.deck-container > .card:nth-of-type(118) {
   z-index: 118;
   -webkit-transform: translateX(-46.8px) translateY(-46.8px);
           transform: translateX(-46.8px) translateY(-46.8px);
 }
 
-.shoe-container > .card:nth-of-type(119) {
+.deck-container > .card:nth-of-type(119) {
   z-index: 119;
   -webkit-transform: translateX(-47.2px) translateY(-47.2px);
           transform: translateX(-47.2px) translateY(-47.2px);
 }
 
-.shoe-container > .card:nth-of-type(120) {
+.deck-container > .card:nth-of-type(120) {
   z-index: 120;
   -webkit-transform: translateX(-47.6px) translateY(-47.6px);
           transform: translateX(-47.6px) translateY(-47.6px);
 }
 
-.shoe-container > .card:nth-of-type(121) {
+.deck-container > .card:nth-of-type(121) {
   z-index: 121;
   -webkit-transform: translateX(-48px) translateY(-48px);
           transform: translateX(-48px) translateY(-48px);
 }
 
-.shoe-container > .card:nth-of-type(122) {
+.deck-container > .card:nth-of-type(122) {
   z-index: 122;
   -webkit-transform: translateX(-48.4px) translateY(-48.4px);
           transform: translateX(-48.4px) translateY(-48.4px);
 }
 
-.shoe-container > .card:nth-of-type(123) {
+.deck-container > .card:nth-of-type(123) {
   z-index: 123;
   -webkit-transform: translateX(-48.8px) translateY(-48.8px);
           transform: translateX(-48.8px) translateY(-48.8px);
 }
 
-.shoe-container > .card:nth-of-type(124) {
+.deck-container > .card:nth-of-type(124) {
   z-index: 124;
   -webkit-transform: translateX(-49.2px) translateY(-49.2px);
           transform: translateX(-49.2px) translateY(-49.2px);
 }
 
-.shoe-container > .card:nth-of-type(125) {
+.deck-container > .card:nth-of-type(125) {
   z-index: 125;
   -webkit-transform: translateX(-49.6px) translateY(-49.6px);
           transform: translateX(-49.6px) translateY(-49.6px);
 }
 
-.shoe-container > .card:nth-of-type(126) {
+.deck-container > .card:nth-of-type(126) {
   z-index: 126;
   -webkit-transform: translateX(-50px) translateY(-50px);
           transform: translateX(-50px) translateY(-50px);
 }
 
-.shoe-container > .card:nth-of-type(127) {
+.deck-container > .card:nth-of-type(127) {
   z-index: 127;
   -webkit-transform: translateX(-50.4px) translateY(-50.4px);
           transform: translateX(-50.4px) translateY(-50.4px);
 }
 
-.shoe-container > .card:nth-of-type(128) {
+.deck-container > .card:nth-of-type(128) {
   z-index: 128;
   -webkit-transform: translateX(-50.8px) translateY(-50.8px);
           transform: translateX(-50.8px) translateY(-50.8px);
 }
 
-.shoe-container > .card:nth-of-type(129) {
+.deck-container > .card:nth-of-type(129) {
   z-index: 129;
   -webkit-transform: translateX(-51.2px) translateY(-51.2px);
           transform: translateX(-51.2px) translateY(-51.2px);
 }
 
-.shoe-container > .card:nth-of-type(130) {
+.deck-container > .card:nth-of-type(130) {
   z-index: 130;
   -webkit-transform: translateX(-51.6px) translateY(-51.6px);
           transform: translateX(-51.6px) translateY(-51.6px);
 }
 
-.shoe-container > .card:nth-of-type(131) {
+.deck-container > .card:nth-of-type(131) {
   z-index: 131;
   -webkit-transform: translateX(-52px) translateY(-52px);
           transform: translateX(-52px) translateY(-52px);
 }
 
-.shoe-container > .card:nth-of-type(132) {
+.deck-container > .card:nth-of-type(132) {
   z-index: 132;
   -webkit-transform: translateX(-52.4px) translateY(-52.4px);
           transform: translateX(-52.4px) translateY(-52.4px);
 }
 
-.shoe-container > .card:nth-of-type(133) {
+.deck-container > .card:nth-of-type(133) {
   z-index: 133;
   -webkit-transform: translateX(-52.8px) translateY(-52.8px);
           transform: translateX(-52.8px) translateY(-52.8px);
 }
 
-.shoe-container > .card:nth-of-type(134) {
+.deck-container > .card:nth-of-type(134) {
   z-index: 134;
   -webkit-transform: translateX(-53.2px) translateY(-53.2px);
           transform: translateX(-53.2px) translateY(-53.2px);
 }
 
-.shoe-container > .card:nth-of-type(135) {
+.deck-container > .card:nth-of-type(135) {
   z-index: 135;
   -webkit-transform: translateX(-53.6px) translateY(-53.6px);
           transform: translateX(-53.6px) translateY(-53.6px);
 }
 
-.shoe-container > .card:nth-of-type(136) {
+.deck-container > .card:nth-of-type(136) {
   z-index: 136;
   -webkit-transform: translateX(-54px) translateY(-54px);
           transform: translateX(-54px) translateY(-54px);
 }
 
-.shoe-container > .card:nth-of-type(137) {
+.deck-container > .card:nth-of-type(137) {
   z-index: 137;
   -webkit-transform: translateX(-54.4px) translateY(-54.4px);
           transform: translateX(-54.4px) translateY(-54.4px);
 }
 
-.shoe-container > .card:nth-of-type(138) {
+.deck-container > .card:nth-of-type(138) {
   z-index: 138;
   -webkit-transform: translateX(-54.8px) translateY(-54.8px);
           transform: translateX(-54.8px) translateY(-54.8px);
 }
 
-.shoe-container > .card:nth-of-type(139) {
+.deck-container > .card:nth-of-type(139) {
   z-index: 139;
   -webkit-transform: translateX(-55.2px) translateY(-55.2px);
           transform: translateX(-55.2px) translateY(-55.2px);
 }
 
-.shoe-container > .card:nth-of-type(140) {
+.deck-container > .card:nth-of-type(140) {
   z-index: 140;
   -webkit-transform: translateX(-55.6px) translateY(-55.6px);
           transform: translateX(-55.6px) translateY(-55.6px);
 }
 
-.shoe-container > .card:nth-of-type(141) {
+.deck-container > .card:nth-of-type(141) {
   z-index: 141;
   -webkit-transform: translateX(-56px) translateY(-56px);
           transform: translateX(-56px) translateY(-56px);
 }
 
-.shoe-container > .card:nth-of-type(142) {
+.deck-container > .card:nth-of-type(142) {
   z-index: 142;
   -webkit-transform: translateX(-56.4px) translateY(-56.4px);
           transform: translateX(-56.4px) translateY(-56.4px);
 }
 
-.shoe-container > .card:nth-of-type(143) {
+.deck-container > .card:nth-of-type(143) {
   z-index: 143;
   -webkit-transform: translateX(-56.8px) translateY(-56.8px);
           transform: translateX(-56.8px) translateY(-56.8px);
 }
 
-.shoe-container > .card:nth-of-type(144) {
+.deck-container > .card:nth-of-type(144) {
   z-index: 144;
   -webkit-transform: translateX(-57.2px) translateY(-57.2px);
           transform: translateX(-57.2px) translateY(-57.2px);
 }
 
-.shoe-container > .card:nth-of-type(145) {
+.deck-container > .card:nth-of-type(145) {
   z-index: 145;
   -webkit-transform: translateX(-57.6px) translateY(-57.6px);
           transform: translateX(-57.6px) translateY(-57.6px);
 }
 
-.shoe-container > .card:nth-of-type(146) {
+.deck-container > .card:nth-of-type(146) {
   z-index: 146;
   -webkit-transform: translateX(-58px) translateY(-58px);
           transform: translateX(-58px) translateY(-58px);
 }
 
-.shoe-container > .card:nth-of-type(147) {
+.deck-container > .card:nth-of-type(147) {
   z-index: 147;
   -webkit-transform: translateX(-58.4px) translateY(-58.4px);
           transform: translateX(-58.4px) translateY(-58.4px);
 }
 
-.shoe-container > .card:nth-of-type(148) {
+.deck-container > .card:nth-of-type(148) {
   z-index: 148;
   -webkit-transform: translateX(-58.8px) translateY(-58.8px);
           transform: translateX(-58.8px) translateY(-58.8px);
 }
 
-.shoe-container > .card:nth-of-type(149) {
+.deck-container > .card:nth-of-type(149) {
   z-index: 149;
   -webkit-transform: translateX(-59.2px) translateY(-59.2px);
           transform: translateX(-59.2px) translateY(-59.2px);
 }
 
-.shoe-container > .card:nth-of-type(150) {
+.deck-container > .card:nth-of-type(150) {
   z-index: 150;
   -webkit-transform: translateX(-59.6px) translateY(-59.6px);
           transform: translateX(-59.6px) translateY(-59.6px);
 }
 
-.shoe-container > .card:nth-of-type(151) {
+.deck-container > .card:nth-of-type(151) {
   z-index: 151;
   -webkit-transform: translateX(-60px) translateY(-60px);
           transform: translateX(-60px) translateY(-60px);
 }
 
-.shoe-container > .card:nth-of-type(152) {
+.deck-container > .card:nth-of-type(152) {
   z-index: 152;
   -webkit-transform: translateX(-60.4px) translateY(-60.4px);
           transform: translateX(-60.4px) translateY(-60.4px);
 }
 
-.shoe-container > .card:nth-of-type(153) {
+.deck-container > .card:nth-of-type(153) {
   z-index: 153;
   -webkit-transform: translateX(-60.8px) translateY(-60.8px);
           transform: translateX(-60.8px) translateY(-60.8px);
 }
 
-.shoe-container > .card:nth-of-type(154) {
+.deck-container > .card:nth-of-type(154) {
   z-index: 154;
   -webkit-transform: translateX(-61.2px) translateY(-61.2px);
           transform: translateX(-61.2px) translateY(-61.2px);
 }
 
-.shoe-container > .card:nth-of-type(155) {
+.deck-container > .card:nth-of-type(155) {
   z-index: 155;
   -webkit-transform: translateX(-61.6px) translateY(-61.6px);
           transform: translateX(-61.6px) translateY(-61.6px);
 }
 
-.shoe-container > .card:nth-of-type(156) {
+.deck-container > .card:nth-of-type(156) {
   z-index: 156;
   -webkit-transform: translateX(-62px) translateY(-62px);
           transform: translateX(-62px) translateY(-62px);
 }
 
-.shoe-container > .card:nth-of-type(157) {
+.deck-container > .card:nth-of-type(157) {
   z-index: 157;
   -webkit-transform: translateX(-62.4px) translateY(-62.4px);
           transform: translateX(-62.4px) translateY(-62.4px);
 }
 
-.shoe-container > .card:nth-of-type(158) {
+.deck-container > .card:nth-of-type(158) {
   z-index: 158;
   -webkit-transform: translateX(-62.8px) translateY(-62.8px);
           transform: translateX(-62.8px) translateY(-62.8px);
 }
 
-.shoe-container > .card:nth-of-type(159) {
+.deck-container > .card:nth-of-type(159) {
   z-index: 159;
   -webkit-transform: translateX(-63.2px) translateY(-63.2px);
           transform: translateX(-63.2px) translateY(-63.2px);
 }
 
-.shoe-container > .card:nth-of-type(160) {
+.deck-container > .card:nth-of-type(160) {
   z-index: 160;
   -webkit-transform: translateX(-63.6px) translateY(-63.6px);
           transform: translateX(-63.6px) translateY(-63.6px);
 }
 
-.shoe-container > .card:nth-of-type(161) {
+.deck-container > .card:nth-of-type(161) {
   z-index: 161;
   -webkit-transform: translateX(-64px) translateY(-64px);
           transform: translateX(-64px) translateY(-64px);
 }
 
-.shoe-container > .card:nth-of-type(162) {
+.deck-container > .card:nth-of-type(162) {
   z-index: 162;
   -webkit-transform: translateX(-64.4px) translateY(-64.4px);
           transform: translateX(-64.4px) translateY(-64.4px);
 }
 
-.shoe-container > .card:nth-of-type(163) {
+.deck-container > .card:nth-of-type(163) {
   z-index: 163;
   -webkit-transform: translateX(-64.8px) translateY(-64.8px);
           transform: translateX(-64.8px) translateY(-64.8px);
 }
 
-.shoe-container > .card:nth-of-type(164) {
+.deck-container > .card:nth-of-type(164) {
   z-index: 164;
   -webkit-transform: translateX(-65.2px) translateY(-65.2px);
           transform: translateX(-65.2px) translateY(-65.2px);
 }
 
-.shoe-container > .card:nth-of-type(165) {
+.deck-container > .card:nth-of-type(165) {
   z-index: 165;
   -webkit-transform: translateX(-65.6px) translateY(-65.6px);
           transform: translateX(-65.6px) translateY(-65.6px);
 }
 
-.shoe-container > .card:nth-of-type(166) {
+.deck-container > .card:nth-of-type(166) {
   z-index: 166;
   -webkit-transform: translateX(-66px) translateY(-66px);
           transform: translateX(-66px) translateY(-66px);
 }
 
-.shoe-container > .card:nth-of-type(167) {
+.deck-container > .card:nth-of-type(167) {
   z-index: 167;
   -webkit-transform: translateX(-66.4px) translateY(-66.4px);
           transform: translateX(-66.4px) translateY(-66.4px);
 }
 
-.shoe-container > .card:nth-of-type(168) {
+.deck-container > .card:nth-of-type(168) {
   z-index: 168;
   -webkit-transform: translateX(-66.8px) translateY(-66.8px);
           transform: translateX(-66.8px) translateY(-66.8px);
 }
 
-.shoe-container > .card:nth-of-type(169) {
+.deck-container > .card:nth-of-type(169) {
   z-index: 169;
   -webkit-transform: translateX(-67.2px) translateY(-67.2px);
           transform: translateX(-67.2px) translateY(-67.2px);
 }
 
-.shoe-container > .card:nth-of-type(170) {
+.deck-container > .card:nth-of-type(170) {
   z-index: 170;
   -webkit-transform: translateX(-67.6px) translateY(-67.6px);
           transform: translateX(-67.6px) translateY(-67.6px);
 }
 
-.shoe-container > .card:nth-of-type(171) {
+.deck-container > .card:nth-of-type(171) {
   z-index: 171;
   -webkit-transform: translateX(-68px) translateY(-68px);
           transform: translateX(-68px) translateY(-68px);
 }
 
-.shoe-container > .card:nth-of-type(172) {
+.deck-container > .card:nth-of-type(172) {
   z-index: 172;
   -webkit-transform: translateX(-68.4px) translateY(-68.4px);
           transform: translateX(-68.4px) translateY(-68.4px);
 }
 
-.shoe-container > .card:nth-of-type(173) {
+.deck-container > .card:nth-of-type(173) {
   z-index: 173;
   -webkit-transform: translateX(-68.8px) translateY(-68.8px);
           transform: translateX(-68.8px) translateY(-68.8px);
 }
 
-.shoe-container > .card:nth-of-type(174) {
+.deck-container > .card:nth-of-type(174) {
   z-index: 174;
   -webkit-transform: translateX(-69.2px) translateY(-69.2px);
           transform: translateX(-69.2px) translateY(-69.2px);
 }
 
-.shoe-container > .card:nth-of-type(175) {
+.deck-container > .card:nth-of-type(175) {
   z-index: 175;
   -webkit-transform: translateX(-69.6px) translateY(-69.6px);
           transform: translateX(-69.6px) translateY(-69.6px);
 }
 
-.shoe-container > .card:nth-of-type(176) {
+.deck-container > .card:nth-of-type(176) {
   z-index: 176;
   -webkit-transform: translateX(-70px) translateY(-70px);
           transform: translateX(-70px) translateY(-70px);
 }
 
-.shoe-container > .card:nth-of-type(177) {
+.deck-container > .card:nth-of-type(177) {
   z-index: 177;
   -webkit-transform: translateX(-70.4px) translateY(-70.4px);
           transform: translateX(-70.4px) translateY(-70.4px);
 }
 
-.shoe-container > .card:nth-of-type(178) {
+.deck-container > .card:nth-of-type(178) {
   z-index: 178;
   -webkit-transform: translateX(-70.8px) translateY(-70.8px);
           transform: translateX(-70.8px) translateY(-70.8px);
 }
 
-.shoe-container > .card:nth-of-type(179) {
+.deck-container > .card:nth-of-type(179) {
   z-index: 179;
   -webkit-transform: translateX(-71.2px) translateY(-71.2px);
           transform: translateX(-71.2px) translateY(-71.2px);
 }
 
-.shoe-container > .card:nth-of-type(180) {
+.deck-container > .card:nth-of-type(180) {
   z-index: 180;
   -webkit-transform: translateX(-71.6px) translateY(-71.6px);
           transform: translateX(-71.6px) translateY(-71.6px);
 }
 
-.shoe-container > .card:nth-of-type(181) {
+.deck-container > .card:nth-of-type(181) {
   z-index: 181;
   -webkit-transform: translateX(-72px) translateY(-72px);
           transform: translateX(-72px) translateY(-72px);
 }
 
-.shoe-container > .card:nth-of-type(182) {
+.deck-container > .card:nth-of-type(182) {
   z-index: 182;
   -webkit-transform: translateX(-72.4px) translateY(-72.4px);
           transform: translateX(-72.4px) translateY(-72.4px);
 }
 
-.shoe-container > .card:nth-of-type(183) {
+.deck-container > .card:nth-of-type(183) {
   z-index: 183;
   -webkit-transform: translateX(-72.8px) translateY(-72.8px);
           transform: translateX(-72.8px) translateY(-72.8px);
 }
 
-.shoe-container > .card:nth-of-type(184) {
+.deck-container > .card:nth-of-type(184) {
   z-index: 184;
   -webkit-transform: translateX(-73.2px) translateY(-73.2px);
           transform: translateX(-73.2px) translateY(-73.2px);
 }
 
-.shoe-container > .card:nth-of-type(185) {
+.deck-container > .card:nth-of-type(185) {
   z-index: 185;
   -webkit-transform: translateX(-73.6px) translateY(-73.6px);
           transform: translateX(-73.6px) translateY(-73.6px);
 }
 
-.shoe-container > .card:nth-of-type(186) {
+.deck-container > .card:nth-of-type(186) {
   z-index: 186;
   -webkit-transform: translateX(-74px) translateY(-74px);
           transform: translateX(-74px) translateY(-74px);
 }
 
-.shoe-container > .card:nth-of-type(187) {
+.deck-container > .card:nth-of-type(187) {
   z-index: 187;
   -webkit-transform: translateX(-74.4px) translateY(-74.4px);
           transform: translateX(-74.4px) translateY(-74.4px);
 }
 
-.shoe-container > .card:nth-of-type(188) {
+.deck-container > .card:nth-of-type(188) {
   z-index: 188;
   -webkit-transform: translateX(-74.8px) translateY(-74.8px);
           transform: translateX(-74.8px) translateY(-74.8px);
 }
 
-.shoe-container > .card:nth-of-type(189) {
+.deck-container > .card:nth-of-type(189) {
   z-index: 189;
   -webkit-transform: translateX(-75.2px) translateY(-75.2px);
           transform: translateX(-75.2px) translateY(-75.2px);
 }
 
-.shoe-container > .card:nth-of-type(190) {
+.deck-container > .card:nth-of-type(190) {
   z-index: 190;
   -webkit-transform: translateX(-75.6px) translateY(-75.6px);
           transform: translateX(-75.6px) translateY(-75.6px);
 }
 
-.shoe-container > .card:nth-of-type(191) {
+.deck-container > .card:nth-of-type(191) {
   z-index: 191;
   -webkit-transform: translateX(-76px) translateY(-76px);
           transform: translateX(-76px) translateY(-76px);
 }
 
-.shoe-container > .card:nth-of-type(192) {
+.deck-container > .card:nth-of-type(192) {
   z-index: 192;
   -webkit-transform: translateX(-76.4px) translateY(-76.4px);
           transform: translateX(-76.4px) translateY(-76.4px);
 }
 
-.shoe-container > .card:nth-of-type(193) {
+.deck-container > .card:nth-of-type(193) {
   z-index: 193;
   -webkit-transform: translateX(-76.8px) translateY(-76.8px);
           transform: translateX(-76.8px) translateY(-76.8px);
 }
 
-.shoe-container > .card:nth-of-type(194) {
+.deck-container > .card:nth-of-type(194) {
   z-index: 194;
   -webkit-transform: translateX(-77.2px) translateY(-77.2px);
           transform: translateX(-77.2px) translateY(-77.2px);
 }
 
-.shoe-container > .card:nth-of-type(195) {
+.deck-container > .card:nth-of-type(195) {
   z-index: 195;
   -webkit-transform: translateX(-77.6px) translateY(-77.6px);
           transform: translateX(-77.6px) translateY(-77.6px);
 }
 
-.shoe-container > .card:nth-of-type(196) {
+.deck-container > .card:nth-of-type(196) {
   z-index: 196;
   -webkit-transform: translateX(-78px) translateY(-78px);
           transform: translateX(-78px) translateY(-78px);
 }
 
-.shoe-container > .card:nth-of-type(197) {
+.deck-container > .card:nth-of-type(197) {
   z-index: 197;
   -webkit-transform: translateX(-78.4px) translateY(-78.4px);
           transform: translateX(-78.4px) translateY(-78.4px);
 }
 
-.shoe-container > .card:nth-of-type(198) {
+.deck-container > .card:nth-of-type(198) {
   z-index: 198;
   -webkit-transform: translateX(-78.8px) translateY(-78.8px);
           transform: translateX(-78.8px) translateY(-78.8px);
 }
 
-.shoe-container > .card:nth-of-type(199) {
+.deck-container > .card:nth-of-type(199) {
   z-index: 199;
   -webkit-transform: translateX(-79.2px) translateY(-79.2px);
           transform: translateX(-79.2px) translateY(-79.2px);
 }
 
-.shoe-container > .card:nth-of-type(200) {
+.deck-container > .card:nth-of-type(200) {
   z-index: 200;
   -webkit-transform: translateX(-79.6px) translateY(-79.6px);
           transform: translateX(-79.6px) translateY(-79.6px);
 }
 
-.shoe-container > .card:nth-of-type(201) {
+.deck-container > .card:nth-of-type(201) {
   z-index: 201;
   -webkit-transform: translateX(-80px) translateY(-80px);
           transform: translateX(-80px) translateY(-80px);
 }
 
-.shoe-container > .card:nth-of-type(202) {
+.deck-container > .card:nth-of-type(202) {
   z-index: 202;
   -webkit-transform: translateX(-80.4px) translateY(-80.4px);
           transform: translateX(-80.4px) translateY(-80.4px);
 }
 
-.shoe-container > .card:nth-of-type(203) {
+.deck-container > .card:nth-of-type(203) {
   z-index: 203;
   -webkit-transform: translateX(-80.8px) translateY(-80.8px);
           transform: translateX(-80.8px) translateY(-80.8px);
 }
 
-.shoe-container > .card:nth-of-type(204) {
+.deck-container > .card:nth-of-type(204) {
   z-index: 204;
   -webkit-transform: translateX(-81.2px) translateY(-81.2px);
           transform: translateX(-81.2px) translateY(-81.2px);
 }
 
-.shoe-container > .card:nth-of-type(205) {
+.deck-container > .card:nth-of-type(205) {
   z-index: 205;
   -webkit-transform: translateX(-81.6px) translateY(-81.6px);
           transform: translateX(-81.6px) translateY(-81.6px);
 }
 
-.shoe-container > .card:nth-of-type(206) {
+.deck-container > .card:nth-of-type(206) {
   z-index: 206;
   -webkit-transform: translateX(-82px) translateY(-82px);
           transform: translateX(-82px) translateY(-82px);
 }
 
-.shoe-container > .card:nth-of-type(207) {
+.deck-container > .card:nth-of-type(207) {
   z-index: 207;
   -webkit-transform: translateX(-82.4px) translateY(-82.4px);
           transform: translateX(-82.4px) translateY(-82.4px);
 }
 
-.shoe-container > .card:nth-of-type(208) {
+.deck-container > .card:nth-of-type(208) {
   z-index: 208;
   -webkit-transform: translateX(-82.8px) translateY(-82.8px);
           transform: translateX(-82.8px) translateY(-82.8px);
 }
 
-.shoe-container > .card:nth-of-type(209) {
+.deck-container > .card:nth-of-type(209) {
   z-index: 209;
   -webkit-transform: translateX(-83.2px) translateY(-83.2px);
           transform: translateX(-83.2px) translateY(-83.2px);
 }
 
-.shoe-container > .card:nth-of-type(210) {
+.deck-container > .card:nth-of-type(210) {
   z-index: 210;
   -webkit-transform: translateX(-83.6px) translateY(-83.6px);
           transform: translateX(-83.6px) translateY(-83.6px);
 }
 
-.shoe-container > .card:nth-of-type(211) {
+.deck-container > .card:nth-of-type(211) {
   z-index: 211;
   -webkit-transform: translateX(-84px) translateY(-84px);
           transform: translateX(-84px) translateY(-84px);
 }
 
-.shoe-container > .card:nth-of-type(212) {
+.deck-container > .card:nth-of-type(212) {
   z-index: 212;
   -webkit-transform: translateX(-84.4px) translateY(-84.4px);
           transform: translateX(-84.4px) translateY(-84.4px);
 }
 
-.shoe-container > .card:nth-of-type(213) {
+.deck-container > .card:nth-of-type(213) {
   z-index: 213;
   -webkit-transform: translateX(-84.8px) translateY(-84.8px);
           transform: translateX(-84.8px) translateY(-84.8px);
 }
 
-.shoe-container > .card:nth-of-type(214) {
+.deck-container > .card:nth-of-type(214) {
   z-index: 214;
   -webkit-transform: translateX(-85.2px) translateY(-85.2px);
           transform: translateX(-85.2px) translateY(-85.2px);
 }
 
-.shoe-container > .card:nth-of-type(215) {
+.deck-container > .card:nth-of-type(215) {
   z-index: 215;
   -webkit-transform: translateX(-85.6px) translateY(-85.6px);
           transform: translateX(-85.6px) translateY(-85.6px);
 }
 
-.shoe-container > .card:nth-of-type(216) {
+.deck-container > .card:nth-of-type(216) {
   z-index: 216;
   -webkit-transform: translateX(-86px) translateY(-86px);
           transform: translateX(-86px) translateY(-86px);
 }
 
-.shoe-container > .card:nth-of-type(217) {
+.deck-container > .card:nth-of-type(217) {
   z-index: 217;
   -webkit-transform: translateX(-86.4px) translateY(-86.4px);
           transform: translateX(-86.4px) translateY(-86.4px);
 }
 
-.shoe-container > .card:nth-of-type(218) {
+.deck-container > .card:nth-of-type(218) {
   z-index: 218;
   -webkit-transform: translateX(-86.8px) translateY(-86.8px);
           transform: translateX(-86.8px) translateY(-86.8px);
 }
 
-.shoe-container > .card:nth-of-type(219) {
+.deck-container > .card:nth-of-type(219) {
   z-index: 219;
   -webkit-transform: translateX(-87.2px) translateY(-87.2px);
           transform: translateX(-87.2px) translateY(-87.2px);
 }
 
-.shoe-container > .card:nth-of-type(220) {
+.deck-container > .card:nth-of-type(220) {
   z-index: 220;
   -webkit-transform: translateX(-87.6px) translateY(-87.6px);
           transform: translateX(-87.6px) translateY(-87.6px);
 }
 
-.shoe-container > .card:nth-of-type(221) {
+.deck-container > .card:nth-of-type(221) {
   z-index: 221;
   -webkit-transform: translateX(-88px) translateY(-88px);
           transform: translateX(-88px) translateY(-88px);
 }
 
-.shoe-container > .card:nth-of-type(222) {
+.deck-container > .card:nth-of-type(222) {
   z-index: 222;
   -webkit-transform: translateX(-88.4px) translateY(-88.4px);
           transform: translateX(-88.4px) translateY(-88.4px);
 }
 
-.shoe-container > .card:nth-of-type(223) {
+.deck-container > .card:nth-of-type(223) {
   z-index: 223;
   -webkit-transform: translateX(-88.8px) translateY(-88.8px);
           transform: translateX(-88.8px) translateY(-88.8px);
 }
 
-.shoe-container > .card:nth-of-type(224) {
+.deck-container > .card:nth-of-type(224) {
   z-index: 224;
   -webkit-transform: translateX(-89.2px) translateY(-89.2px);
           transform: translateX(-89.2px) translateY(-89.2px);
 }
 
-.shoe-container > .card:nth-of-type(225) {
+.deck-container > .card:nth-of-type(225) {
   z-index: 225;
   -webkit-transform: translateX(-89.6px) translateY(-89.6px);
           transform: translateX(-89.6px) translateY(-89.6px);
 }
 
-.shoe-container > .card:nth-of-type(226) {
+.deck-container > .card:nth-of-type(226) {
   z-index: 226;
   -webkit-transform: translateX(-90px) translateY(-90px);
           transform: translateX(-90px) translateY(-90px);
 }
 
-.shoe-container > .card:nth-of-type(227) {
+.deck-container > .card:nth-of-type(227) {
   z-index: 227;
   -webkit-transform: translateX(-90.4px) translateY(-90.4px);
           transform: translateX(-90.4px) translateY(-90.4px);
 }
 
-.shoe-container > .card:nth-of-type(228) {
+.deck-container > .card:nth-of-type(228) {
   z-index: 228;
   -webkit-transform: translateX(-90.8px) translateY(-90.8px);
           transform: translateX(-90.8px) translateY(-90.8px);
 }
 
-.shoe-container > .card:nth-of-type(229) {
+.deck-container > .card:nth-of-type(229) {
   z-index: 229;
   -webkit-transform: translateX(-91.2px) translateY(-91.2px);
           transform: translateX(-91.2px) translateY(-91.2px);
 }
 
-.shoe-container > .card:nth-of-type(230) {
+.deck-container > .card:nth-of-type(230) {
   z-index: 230;
   -webkit-transform: translateX(-91.6px) translateY(-91.6px);
           transform: translateX(-91.6px) translateY(-91.6px);
 }
 
-.shoe-container > .card:nth-of-type(231) {
+.deck-container > .card:nth-of-type(231) {
   z-index: 231;
   -webkit-transform: translateX(-92px) translateY(-92px);
           transform: translateX(-92px) translateY(-92px);
 }
 
-.shoe-container > .card:nth-of-type(232) {
+.deck-container > .card:nth-of-type(232) {
   z-index: 232;
   -webkit-transform: translateX(-92.4px) translateY(-92.4px);
           transform: translateX(-92.4px) translateY(-92.4px);
 }
 
-.shoe-container > .card:nth-of-type(233) {
+.deck-container > .card:nth-of-type(233) {
   z-index: 233;
   -webkit-transform: translateX(-92.8px) translateY(-92.8px);
           transform: translateX(-92.8px) translateY(-92.8px);
 }
 
-.shoe-container > .card:nth-of-type(234) {
+.deck-container > .card:nth-of-type(234) {
   z-index: 234;
   -webkit-transform: translateX(-93.2px) translateY(-93.2px);
           transform: translateX(-93.2px) translateY(-93.2px);
 }
 
-.shoe-container > .card:nth-of-type(235) {
+.deck-container > .card:nth-of-type(235) {
   z-index: 235;
   -webkit-transform: translateX(-93.6px) translateY(-93.6px);
           transform: translateX(-93.6px) translateY(-93.6px);
 }
 
-.shoe-container > .card:nth-of-type(236) {
+.deck-container > .card:nth-of-type(236) {
   z-index: 236;
   -webkit-transform: translateX(-94px) translateY(-94px);
           transform: translateX(-94px) translateY(-94px);
 }
 
-.shoe-container > .card:nth-of-type(237) {
+.deck-container > .card:nth-of-type(237) {
   z-index: 237;
   -webkit-transform: translateX(-94.4px) translateY(-94.4px);
           transform: translateX(-94.4px) translateY(-94.4px);
 }
 
-.shoe-container > .card:nth-of-type(238) {
+.deck-container > .card:nth-of-type(238) {
   z-index: 238;
   -webkit-transform: translateX(-94.8px) translateY(-94.8px);
           transform: translateX(-94.8px) translateY(-94.8px);
 }
 
-.shoe-container > .card:nth-of-type(239) {
+.deck-container > .card:nth-of-type(239) {
   z-index: 239;
   -webkit-transform: translateX(-95.2px) translateY(-95.2px);
           transform: translateX(-95.2px) translateY(-95.2px);
 }
 
-.shoe-container > .card:nth-of-type(240) {
+.deck-container > .card:nth-of-type(240) {
   z-index: 240;
   -webkit-transform: translateX(-95.6px) translateY(-95.6px);
           transform: translateX(-95.6px) translateY(-95.6px);
 }
 
-.shoe-container > .card:nth-of-type(241) {
+.deck-container > .card:nth-of-type(241) {
   z-index: 241;
   -webkit-transform: translateX(-96px) translateY(-96px);
           transform: translateX(-96px) translateY(-96px);
 }
 
-.shoe-container > .card:nth-of-type(242) {
+.deck-container > .card:nth-of-type(242) {
   z-index: 242;
   -webkit-transform: translateX(-96.4px) translateY(-96.4px);
           transform: translateX(-96.4px) translateY(-96.4px);
 }
 
-.shoe-container > .card:nth-of-type(243) {
+.deck-container > .card:nth-of-type(243) {
   z-index: 243;
   -webkit-transform: translateX(-96.8px) translateY(-96.8px);
           transform: translateX(-96.8px) translateY(-96.8px);
 }
 
-.shoe-container > .card:nth-of-type(244) {
+.deck-container > .card:nth-of-type(244) {
   z-index: 244;
   -webkit-transform: translateX(-97.2px) translateY(-97.2px);
           transform: translateX(-97.2px) translateY(-97.2px);
 }
 
-.shoe-container > .card:nth-of-type(245) {
+.deck-container > .card:nth-of-type(245) {
   z-index: 245;
   -webkit-transform: translateX(-97.6px) translateY(-97.6px);
           transform: translateX(-97.6px) translateY(-97.6px);
 }
 
-.shoe-container > .card:nth-of-type(246) {
+.deck-container > .card:nth-of-type(246) {
   z-index: 246;
   -webkit-transform: translateX(-98px) translateY(-98px);
           transform: translateX(-98px) translateY(-98px);
 }
 
-.shoe-container > .card:nth-of-type(247) {
+.deck-container > .card:nth-of-type(247) {
   z-index: 247;
   -webkit-transform: translateX(-98.4px) translateY(-98.4px);
           transform: translateX(-98.4px) translateY(-98.4px);
 }
 
-.shoe-container > .card:nth-of-type(248) {
+.deck-container > .card:nth-of-type(248) {
   z-index: 248;
   -webkit-transform: translateX(-98.8px) translateY(-98.8px);
           transform: translateX(-98.8px) translateY(-98.8px);
 }
 
-.shoe-container > .card:nth-of-type(249) {
+.deck-container > .card:nth-of-type(249) {
   z-index: 249;
   -webkit-transform: translateX(-99.2px) translateY(-99.2px);
           transform: translateX(-99.2px) translateY(-99.2px);
 }
 
-.shoe-container > .card:nth-of-type(250) {
+.deck-container > .card:nth-of-type(250) {
   z-index: 250;
   -webkit-transform: translateX(-99.6px) translateY(-99.6px);
           transform: translateX(-99.6px) translateY(-99.6px);
 }
 
-.shoe-container > .card:nth-of-type(251) {
+.deck-container > .card:nth-of-type(251) {
   z-index: 251;
   -webkit-transform: translateX(-100px) translateY(-100px);
           transform: translateX(-100px) translateY(-100px);
 }
 
-.shoe-container > .card:nth-of-type(252) {
+.deck-container > .card:nth-of-type(252) {
   z-index: 252;
   -webkit-transform: translateX(-100.4px) translateY(-100.4px);
           transform: translateX(-100.4px) translateY(-100.4px);
 }
 
-.shoe-container > .card:nth-of-type(253) {
+.deck-container > .card:nth-of-type(253) {
   z-index: 253;
   -webkit-transform: translateX(-100.8px) translateY(-100.8px);
           transform: translateX(-100.8px) translateY(-100.8px);
 }
 
-.shoe-container > .card:nth-of-type(254) {
+.deck-container > .card:nth-of-type(254) {
   z-index: 254;
   -webkit-transform: translateX(-101.2px) translateY(-101.2px);
           transform: translateX(-101.2px) translateY(-101.2px);
 }
 
-.shoe-container > .card:nth-of-type(255) {
+.deck-container > .card:nth-of-type(255) {
   z-index: 255;
   -webkit-transform: translateX(-101.6px) translateY(-101.6px);
           transform: translateX(-101.6px) translateY(-101.6px);
 }
 
-.shoe-container > .card:nth-of-type(256) {
+.deck-container > .card:nth-of-type(256) {
   z-index: 256;
   -webkit-transform: translateX(-102px) translateY(-102px);
           transform: translateX(-102px) translateY(-102px);
 }
 
-.shoe-container > .card:nth-of-type(257) {
+.deck-container > .card:nth-of-type(257) {
   z-index: 257;
   -webkit-transform: translateX(-102.4px) translateY(-102.4px);
           transform: translateX(-102.4px) translateY(-102.4px);
 }
 
-.shoe-container > .card:nth-of-type(258) {
+.deck-container > .card:nth-of-type(258) {
   z-index: 258;
   -webkit-transform: translateX(-102.8px) translateY(-102.8px);
           transform: translateX(-102.8px) translateY(-102.8px);
 }
 
-.shoe-container > .card:nth-of-type(259) {
+.deck-container > .card:nth-of-type(259) {
   z-index: 259;
   -webkit-transform: translateX(-103.2px) translateY(-103.2px);
           transform: translateX(-103.2px) translateY(-103.2px);
 }
 
-.shoe-container > .card:nth-of-type(260) {
+.deck-container > .card:nth-of-type(260) {
   z-index: 260;
   -webkit-transform: translateX(-103.6px) translateY(-103.6px);
           transform: translateX(-103.6px) translateY(-103.6px);
 }
 
-.shoe-container > .card:nth-of-type(261) {
+.deck-container > .card:nth-of-type(261) {
   z-index: 261;
   -webkit-transform: translateX(-104px) translateY(-104px);
           transform: translateX(-104px) translateY(-104px);
 }
 
-.shoe-container > .card:nth-of-type(262) {
+.deck-container > .card:nth-of-type(262) {
   z-index: 262;
   -webkit-transform: translateX(-104.4px) translateY(-104.4px);
           transform: translateX(-104.4px) translateY(-104.4px);
 }
 
-.shoe-container > .card:nth-of-type(263) {
+.deck-container > .card:nth-of-type(263) {
   z-index: 263;
   -webkit-transform: translateX(-104.8px) translateY(-104.8px);
           transform: translateX(-104.8px) translateY(-104.8px);
 }
 
-.shoe-container > .card:nth-of-type(264) {
+.deck-container > .card:nth-of-type(264) {
   z-index: 264;
   -webkit-transform: translateX(-105.2px) translateY(-105.2px);
           transform: translateX(-105.2px) translateY(-105.2px);
 }
 
-.shoe-container > .card:nth-of-type(265) {
+.deck-container > .card:nth-of-type(265) {
   z-index: 265;
   -webkit-transform: translateX(-105.6px) translateY(-105.6px);
           transform: translateX(-105.6px) translateY(-105.6px);
 }
 
-.shoe-container > .card:nth-of-type(266) {
+.deck-container > .card:nth-of-type(266) {
   z-index: 266;
   -webkit-transform: translateX(-106px) translateY(-106px);
           transform: translateX(-106px) translateY(-106px);
 }
 
-.shoe-container > .card:nth-of-type(267) {
+.deck-container > .card:nth-of-type(267) {
   z-index: 267;
   -webkit-transform: translateX(-106.4px) translateY(-106.4px);
           transform: translateX(-106.4px) translateY(-106.4px);
 }
 
-.shoe-container > .card:nth-of-type(268) {
+.deck-container > .card:nth-of-type(268) {
   z-index: 268;
   -webkit-transform: translateX(-106.8px) translateY(-106.8px);
           transform: translateX(-106.8px) translateY(-106.8px);
 }
 
-.shoe-container > .card:nth-of-type(269) {
+.deck-container > .card:nth-of-type(269) {
   z-index: 269;
   -webkit-transform: translateX(-107.2px) translateY(-107.2px);
           transform: translateX(-107.2px) translateY(-107.2px);
 }
 
-.shoe-container > .card:nth-of-type(270) {
+.deck-container > .card:nth-of-type(270) {
   z-index: 270;
   -webkit-transform: translateX(-107.6px) translateY(-107.6px);
           transform: translateX(-107.6px) translateY(-107.6px);
 }
 
-.shoe-container > .card:nth-of-type(271) {
+.deck-container > .card:nth-of-type(271) {
   z-index: 271;
   -webkit-transform: translateX(-108px) translateY(-108px);
           transform: translateX(-108px) translateY(-108px);
 }
 
-.shoe-container > .card:nth-of-type(272) {
+.deck-container > .card:nth-of-type(272) {
   z-index: 272;
   -webkit-transform: translateX(-108.4px) translateY(-108.4px);
           transform: translateX(-108.4px) translateY(-108.4px);
 }
 
-.shoe-container > .card:nth-of-type(273) {
+.deck-container > .card:nth-of-type(273) {
   z-index: 273;
   -webkit-transform: translateX(-108.8px) translateY(-108.8px);
           transform: translateX(-108.8px) translateY(-108.8px);
 }
 
-.shoe-container > .card:nth-of-type(274) {
+.deck-container > .card:nth-of-type(274) {
   z-index: 274;
   -webkit-transform: translateX(-109.2px) translateY(-109.2px);
           transform: translateX(-109.2px) translateY(-109.2px);
 }
 
-.shoe-container > .card:nth-of-type(275) {
+.deck-container > .card:nth-of-type(275) {
   z-index: 275;
   -webkit-transform: translateX(-109.6px) translateY(-109.6px);
           transform: translateX(-109.6px) translateY(-109.6px);
 }
 
-.shoe-container > .card:nth-of-type(276) {
+.deck-container > .card:nth-of-type(276) {
   z-index: 276;
   -webkit-transform: translateX(-110px) translateY(-110px);
           transform: translateX(-110px) translateY(-110px);
 }
 
-.shoe-container > .card:nth-of-type(277) {
+.deck-container > .card:nth-of-type(277) {
   z-index: 277;
   -webkit-transform: translateX(-110.4px) translateY(-110.4px);
           transform: translateX(-110.4px) translateY(-110.4px);
 }
 
-.shoe-container > .card:nth-of-type(278) {
+.deck-container > .card:nth-of-type(278) {
   z-index: 278;
   -webkit-transform: translateX(-110.8px) translateY(-110.8px);
           transform: translateX(-110.8px) translateY(-110.8px);
 }
 
-.shoe-container > .card:nth-of-type(279) {
+.deck-container > .card:nth-of-type(279) {
   z-index: 279;
   -webkit-transform: translateX(-111.2px) translateY(-111.2px);
           transform: translateX(-111.2px) translateY(-111.2px);
 }
 
-.shoe-container > .card:nth-of-type(280) {
+.deck-container > .card:nth-of-type(280) {
   z-index: 280;
   -webkit-transform: translateX(-111.6px) translateY(-111.6px);
           transform: translateX(-111.6px) translateY(-111.6px);
 }
 
-.shoe-container > .card:nth-of-type(281) {
+.deck-container > .card:nth-of-type(281) {
   z-index: 281;
   -webkit-transform: translateX(-112px) translateY(-112px);
           transform: translateX(-112px) translateY(-112px);
 }
 
-.shoe-container > .card:nth-of-type(282) {
+.deck-container > .card:nth-of-type(282) {
   z-index: 282;
   -webkit-transform: translateX(-112.4px) translateY(-112.4px);
           transform: translateX(-112.4px) translateY(-112.4px);
 }
 
-.shoe-container > .card:nth-of-type(283) {
+.deck-container > .card:nth-of-type(283) {
   z-index: 283;
   -webkit-transform: translateX(-112.8px) translateY(-112.8px);
           transform: translateX(-112.8px) translateY(-112.8px);
 }
 
-.shoe-container > .card:nth-of-type(284) {
+.deck-container > .card:nth-of-type(284) {
   z-index: 284;
   -webkit-transform: translateX(-113.2px) translateY(-113.2px);
           transform: translateX(-113.2px) translateY(-113.2px);
 }
 
-.shoe-container > .card:nth-of-type(285) {
+.deck-container > .card:nth-of-type(285) {
   z-index: 285;
   -webkit-transform: translateX(-113.6px) translateY(-113.6px);
           transform: translateX(-113.6px) translateY(-113.6px);
 }
 
-.shoe-container > .card:nth-of-type(286) {
+.deck-container > .card:nth-of-type(286) {
   z-index: 286;
   -webkit-transform: translateX(-114px) translateY(-114px);
           transform: translateX(-114px) translateY(-114px);
 }
 
-.shoe-container > .card:nth-of-type(287) {
+.deck-container > .card:nth-of-type(287) {
   z-index: 287;
   -webkit-transform: translateX(-114.4px) translateY(-114.4px);
           transform: translateX(-114.4px) translateY(-114.4px);
 }
 
-.shoe-container > .card:nth-of-type(288) {
+.deck-container > .card:nth-of-type(288) {
   z-index: 288;
   -webkit-transform: translateX(-114.8px) translateY(-114.8px);
           transform: translateX(-114.8px) translateY(-114.8px);
 }
 
-.shoe-container > .card:nth-of-type(289) {
+.deck-container > .card:nth-of-type(289) {
   z-index: 289;
   -webkit-transform: translateX(-115.2px) translateY(-115.2px);
           transform: translateX(-115.2px) translateY(-115.2px);
 }
 
-.shoe-container > .card:nth-of-type(290) {
+.deck-container > .card:nth-of-type(290) {
   z-index: 290;
   -webkit-transform: translateX(-115.6px) translateY(-115.6px);
           transform: translateX(-115.6px) translateY(-115.6px);
 }
 
-.shoe-container > .card:nth-of-type(291) {
+.deck-container > .card:nth-of-type(291) {
   z-index: 291;
   -webkit-transform: translateX(-116px) translateY(-116px);
           transform: translateX(-116px) translateY(-116px);
 }
 
-.shoe-container > .card:nth-of-type(292) {
+.deck-container > .card:nth-of-type(292) {
   z-index: 292;
   -webkit-transform: translateX(-116.4px) translateY(-116.4px);
           transform: translateX(-116.4px) translateY(-116.4px);
 }
 
-.shoe-container > .card:nth-of-type(293) {
+.deck-container > .card:nth-of-type(293) {
   z-index: 293;
   -webkit-transform: translateX(-116.8px) translateY(-116.8px);
           transform: translateX(-116.8px) translateY(-116.8px);
 }
 
-.shoe-container > .card:nth-of-type(294) {
+.deck-container > .card:nth-of-type(294) {
   z-index: 294;
   -webkit-transform: translateX(-117.2px) translateY(-117.2px);
           transform: translateX(-117.2px) translateY(-117.2px);
 }
 
-.shoe-container > .card:nth-of-type(295) {
+.deck-container > .card:nth-of-type(295) {
   z-index: 295;
   -webkit-transform: translateX(-117.6px) translateY(-117.6px);
           transform: translateX(-117.6px) translateY(-117.6px);
 }
 
-.shoe-container > .card:nth-of-type(296) {
+.deck-container > .card:nth-of-type(296) {
   z-index: 296;
   -webkit-transform: translateX(-118px) translateY(-118px);
           transform: translateX(-118px) translateY(-118px);
 }
 
-.shoe-container > .card:nth-of-type(297) {
+.deck-container > .card:nth-of-type(297) {
   z-index: 297;
   -webkit-transform: translateX(-118.4px) translateY(-118.4px);
           transform: translateX(-118.4px) translateY(-118.4px);
 }
 
-.shoe-container > .card:nth-of-type(298) {
+.deck-container > .card:nth-of-type(298) {
   z-index: 298;
   -webkit-transform: translateX(-118.8px) translateY(-118.8px);
           transform: translateX(-118.8px) translateY(-118.8px);
 }
 
-.shoe-container > .card:nth-of-type(299) {
+.deck-container > .card:nth-of-type(299) {
   z-index: 299;
   -webkit-transform: translateX(-119.2px) translateY(-119.2px);
           transform: translateX(-119.2px) translateY(-119.2px);
 }
 
-.shoe-container > .card:nth-of-type(300) {
+.deck-container > .card:nth-of-type(300) {
   z-index: 300;
   -webkit-transform: translateX(-119.6px) translateY(-119.6px);
           transform: translateX(-119.6px) translateY(-119.6px);
 }
 
-.shoe-container > .card:nth-of-type(301) {
+.deck-container > .card:nth-of-type(301) {
   z-index: 301;
   -webkit-transform: translateX(-120px) translateY(-120px);
           transform: translateX(-120px) translateY(-120px);
 }
 
-.shoe-container > .card:nth-of-type(302) {
+.deck-container > .card:nth-of-type(302) {
   z-index: 302;
   -webkit-transform: translateX(-120.4px) translateY(-120.4px);
           transform: translateX(-120.4px) translateY(-120.4px);
 }
 
-.shoe-container > .card:nth-of-type(303) {
+.deck-container > .card:nth-of-type(303) {
   z-index: 303;
   -webkit-transform: translateX(-120.8px) translateY(-120.8px);
           transform: translateX(-120.8px) translateY(-120.8px);
 }
 
-.shoe-container > .card:nth-of-type(304) {
+.deck-container > .card:nth-of-type(304) {
   z-index: 304;
   -webkit-transform: translateX(-121.2px) translateY(-121.2px);
           transform: translateX(-121.2px) translateY(-121.2px);
 }
 
-.shoe-container > .card:nth-of-type(305) {
+.deck-container > .card:nth-of-type(305) {
   z-index: 305;
   -webkit-transform: translateX(-121.6px) translateY(-121.6px);
           transform: translateX(-121.6px) translateY(-121.6px);
 }
 
-.shoe-container > .card:nth-of-type(306) {
+.deck-container > .card:nth-of-type(306) {
   z-index: 306;
   -webkit-transform: translateX(-122px) translateY(-122px);
           transform: translateX(-122px) translateY(-122px);
 }
 
-.shoe-container > .card:nth-of-type(307) {
+.deck-container > .card:nth-of-type(307) {
   z-index: 307;
   -webkit-transform: translateX(-122.4px) translateY(-122.4px);
           transform: translateX(-122.4px) translateY(-122.4px);
 }
 
-.shoe-container > .card:nth-of-type(308) {
+.deck-container > .card:nth-of-type(308) {
   z-index: 308;
   -webkit-transform: translateX(-122.8px) translateY(-122.8px);
           transform: translateX(-122.8px) translateY(-122.8px);
 }
 
-.shoe-container > .card:nth-of-type(309) {
+.deck-container > .card:nth-of-type(309) {
   z-index: 309;
   -webkit-transform: translateX(-123.2px) translateY(-123.2px);
           transform: translateX(-123.2px) translateY(-123.2px);
 }
 
-.shoe-container > .card:nth-of-type(310) {
+.deck-container > .card:nth-of-type(310) {
   z-index: 310;
   -webkit-transform: translateX(-123.6px) translateY(-123.6px);
           transform: translateX(-123.6px) translateY(-123.6px);
 }
 
-.shoe-container > .card:nth-of-type(311) {
+.deck-container > .card:nth-of-type(311) {
   z-index: 311;
   -webkit-transform: translateX(-124px) translateY(-124px);
           transform: translateX(-124px) translateY(-124px);
 }
 
-.shoe-container > .card:nth-of-type(312) {
+.deck-container > .card:nth-of-type(312) {
   z-index: 312;
   -webkit-transform: translateX(-124.4px) translateY(-124.4px);
           transform: translateX(-124.4px) translateY(-124.4px);
 }
 
-.shoe-container > .card:nth-of-type(313) {
+.deck-container > .card:nth-of-type(313) {
   z-index: 313;
   -webkit-transform: translateX(-124.8px) translateY(-124.8px);
           transform: translateX(-124.8px) translateY(-124.8px);
 }
 
-.shoe-container > .card:nth-of-type(314) {
+.deck-container > .card:nth-of-type(314) {
   z-index: 314;
   -webkit-transform: translateX(-125.2px) translateY(-125.2px);
           transform: translateX(-125.2px) translateY(-125.2px);
 }
 
-.shoe-container > .card:nth-of-type(315) {
+.deck-container > .card:nth-of-type(315) {
   z-index: 315;
   -webkit-transform: translateX(-125.6px) translateY(-125.6px);
           transform: translateX(-125.6px) translateY(-125.6px);
 }
 
-.shoe-container > .card:nth-of-type(316) {
+.deck-container > .card:nth-of-type(316) {
   z-index: 316;
   -webkit-transform: translateX(-126px) translateY(-126px);
           transform: translateX(-126px) translateY(-126px);
 }
 
-.shoe-container > .card:nth-of-type(317) {
+.deck-container > .card:nth-of-type(317) {
   z-index: 317;
   -webkit-transform: translateX(-126.4px) translateY(-126.4px);
           transform: translateX(-126.4px) translateY(-126.4px);
 }
 
-.shoe-container > .card:nth-of-type(318) {
+.deck-container > .card:nth-of-type(318) {
   z-index: 318;
   -webkit-transform: translateX(-126.8px) translateY(-126.8px);
           transform: translateX(-126.8px) translateY(-126.8px);
 }
 
-.shoe-container > .card:nth-of-type(319) {
+.deck-container > .card:nth-of-type(319) {
   z-index: 319;
   -webkit-transform: translateX(-127.2px) translateY(-127.2px);
           transform: translateX(-127.2px) translateY(-127.2px);
 }
 
-.shoe-container > .card:nth-of-type(320) {
+.deck-container > .card:nth-of-type(320) {
   z-index: 320;
   -webkit-transform: translateX(-127.6px) translateY(-127.6px);
           transform: translateX(-127.6px) translateY(-127.6px);
 }
 
-.shoe-container > .card:nth-of-type(321) {
+.deck-container > .card:nth-of-type(321) {
   z-index: 321;
   -webkit-transform: translateX(-128px) translateY(-128px);
           transform: translateX(-128px) translateY(-128px);
 }
 
-.shoe-container > .card:nth-of-type(322) {
+.deck-container > .card:nth-of-type(322) {
   z-index: 322;
   -webkit-transform: translateX(-128.4px) translateY(-128.4px);
           transform: translateX(-128.4px) translateY(-128.4px);
 }
 
-.shoe-container > .card:nth-of-type(323) {
+.deck-container > .card:nth-of-type(323) {
   z-index: 323;
   -webkit-transform: translateX(-128.8px) translateY(-128.8px);
           transform: translateX(-128.8px) translateY(-128.8px);
 }
 
-.shoe-container > .card:nth-of-type(324) {
+.deck-container > .card:nth-of-type(324) {
   z-index: 324;
   -webkit-transform: translateX(-129.2px) translateY(-129.2px);
           transform: translateX(-129.2px) translateY(-129.2px);
 }
 
-.shoe-container > .card:nth-of-type(325) {
+.deck-container > .card:nth-of-type(325) {
   z-index: 325;
   -webkit-transform: translateX(-129.6px) translateY(-129.6px);
           transform: translateX(-129.6px) translateY(-129.6px);
 }
 
-.shoe-container > .card:nth-of-type(326) {
+.deck-container > .card:nth-of-type(326) {
   z-index: 326;
   -webkit-transform: translateX(-130px) translateY(-130px);
           transform: translateX(-130px) translateY(-130px);
 }
 
-.shoe-container > .card:nth-of-type(327) {
+.deck-container > .card:nth-of-type(327) {
   z-index: 327;
   -webkit-transform: translateX(-130.4px) translateY(-130.4px);
           transform: translateX(-130.4px) translateY(-130.4px);
 }
 
-.shoe-container > .card:nth-of-type(328) {
+.deck-container > .card:nth-of-type(328) {
   z-index: 328;
   -webkit-transform: translateX(-130.8px) translateY(-130.8px);
           transform: translateX(-130.8px) translateY(-130.8px);
 }
 
-.shoe-container > .card:nth-of-type(329) {
+.deck-container > .card:nth-of-type(329) {
   z-index: 329;
   -webkit-transform: translateX(-131.2px) translateY(-131.2px);
           transform: translateX(-131.2px) translateY(-131.2px);
 }
 
-.shoe-container > .card:nth-of-type(330) {
+.deck-container > .card:nth-of-type(330) {
   z-index: 330;
   -webkit-transform: translateX(-131.6px) translateY(-131.6px);
           transform: translateX(-131.6px) translateY(-131.6px);
 }
 
-.shoe-container > .card:nth-of-type(331) {
+.deck-container > .card:nth-of-type(331) {
   z-index: 331;
   -webkit-transform: translateX(-132px) translateY(-132px);
           transform: translateX(-132px) translateY(-132px);
 }
 
-.shoe-container > .card:nth-of-type(332) {
+.deck-container > .card:nth-of-type(332) {
   z-index: 332;
   -webkit-transform: translateX(-132.4px) translateY(-132.4px);
           transform: translateX(-132.4px) translateY(-132.4px);
 }
 
-.shoe-container > .card:nth-of-type(333) {
+.deck-container > .card:nth-of-type(333) {
   z-index: 333;
   -webkit-transform: translateX(-132.8px) translateY(-132.8px);
           transform: translateX(-132.8px) translateY(-132.8px);
 }
 
-.shoe-container > .card:nth-of-type(334) {
+.deck-container > .card:nth-of-type(334) {
   z-index: 334;
   -webkit-transform: translateX(-133.2px) translateY(-133.2px);
           transform: translateX(-133.2px) translateY(-133.2px);
 }
 
-.shoe-container > .card:nth-of-type(335) {
+.deck-container > .card:nth-of-type(335) {
   z-index: 335;
   -webkit-transform: translateX(-133.6px) translateY(-133.6px);
           transform: translateX(-133.6px) translateY(-133.6px);
 }
 
-.shoe-container > .card:nth-of-type(336) {
+.deck-container > .card:nth-of-type(336) {
   z-index: 336;
   -webkit-transform: translateX(-134px) translateY(-134px);
           transform: translateX(-134px) translateY(-134px);
 }
 
-.shoe-container > .card:nth-of-type(337) {
+.deck-container > .card:nth-of-type(337) {
   z-index: 337;
   -webkit-transform: translateX(-134.4px) translateY(-134.4px);
           transform: translateX(-134.4px) translateY(-134.4px);
 }
 
-.shoe-container > .card:nth-of-type(338) {
+.deck-container > .card:nth-of-type(338) {
   z-index: 338;
   -webkit-transform: translateX(-134.8px) translateY(-134.8px);
           transform: translateX(-134.8px) translateY(-134.8px);
 }
 
-.shoe-container > .card:nth-of-type(339) {
+.deck-container > .card:nth-of-type(339) {
   z-index: 339;
   -webkit-transform: translateX(-135.2px) translateY(-135.2px);
           transform: translateX(-135.2px) translateY(-135.2px);
 }
 
-.shoe-container > .card:nth-of-type(340) {
+.deck-container > .card:nth-of-type(340) {
   z-index: 340;
   -webkit-transform: translateX(-135.6px) translateY(-135.6px);
           transform: translateX(-135.6px) translateY(-135.6px);
 }
 
-.shoe-container > .card:nth-of-type(341) {
+.deck-container > .card:nth-of-type(341) {
   z-index: 341;
   -webkit-transform: translateX(-136px) translateY(-136px);
           transform: translateX(-136px) translateY(-136px);
 }
 
-.shoe-container > .card:nth-of-type(342) {
+.deck-container > .card:nth-of-type(342) {
   z-index: 342;
   -webkit-transform: translateX(-136.4px) translateY(-136.4px);
           transform: translateX(-136.4px) translateY(-136.4px);
 }
 
-.shoe-container > .card:nth-of-type(343) {
+.deck-container > .card:nth-of-type(343) {
   z-index: 343;
   -webkit-transform: translateX(-136.8px) translateY(-136.8px);
           transform: translateX(-136.8px) translateY(-136.8px);
 }
 
-.shoe-container > .card:nth-of-type(344) {
+.deck-container > .card:nth-of-type(344) {
   z-index: 344;
   -webkit-transform: translateX(-137.2px) translateY(-137.2px);
           transform: translateX(-137.2px) translateY(-137.2px);
 }
 
-.shoe-container > .card:nth-of-type(345) {
+.deck-container > .card:nth-of-type(345) {
   z-index: 345;
   -webkit-transform: translateX(-137.6px) translateY(-137.6px);
           transform: translateX(-137.6px) translateY(-137.6px);
 }
 
-.shoe-container > .card:nth-of-type(346) {
+.deck-container > .card:nth-of-type(346) {
   z-index: 346;
   -webkit-transform: translateX(-138px) translateY(-138px);
           transform: translateX(-138px) translateY(-138px);
 }
 
-.shoe-container > .card:nth-of-type(347) {
+.deck-container > .card:nth-of-type(347) {
   z-index: 347;
   -webkit-transform: translateX(-138.4px) translateY(-138.4px);
           transform: translateX(-138.4px) translateY(-138.4px);
 }
 
-.shoe-container > .card:nth-of-type(348) {
+.deck-container > .card:nth-of-type(348) {
   z-index: 348;
   -webkit-transform: translateX(-138.8px) translateY(-138.8px);
           transform: translateX(-138.8px) translateY(-138.8px);
 }
 
-.shoe-container > .card:nth-of-type(349) {
+.deck-container > .card:nth-of-type(349) {
   z-index: 349;
   -webkit-transform: translateX(-139.2px) translateY(-139.2px);
           transform: translateX(-139.2px) translateY(-139.2px);
 }
 
-.shoe-container > .card:nth-of-type(350) {
+.deck-container > .card:nth-of-type(350) {
   z-index: 350;
   -webkit-transform: translateX(-139.6px) translateY(-139.6px);
           transform: translateX(-139.6px) translateY(-139.6px);
 }
 
-.shoe-container > .card:nth-of-type(351) {
+.deck-container > .card:nth-of-type(351) {
   z-index: 351;
   -webkit-transform: translateX(-140px) translateY(-140px);
           transform: translateX(-140px) translateY(-140px);
 }
 
-.shoe-container > .card:nth-of-type(352) {
+.deck-container > .card:nth-of-type(352) {
   z-index: 352;
   -webkit-transform: translateX(-140.4px) translateY(-140.4px);
           transform: translateX(-140.4px) translateY(-140.4px);
 }
 
-.shoe-container > .card:nth-of-type(353) {
+.deck-container > .card:nth-of-type(353) {
   z-index: 353;
   -webkit-transform: translateX(-140.8px) translateY(-140.8px);
           transform: translateX(-140.8px) translateY(-140.8px);
 }
 
-.shoe-container > .card:nth-of-type(354) {
+.deck-container > .card:nth-of-type(354) {
   z-index: 354;
   -webkit-transform: translateX(-141.2px) translateY(-141.2px);
           transform: translateX(-141.2px) translateY(-141.2px);
 }
 
-.shoe-container > .card:nth-of-type(355) {
+.deck-container > .card:nth-of-type(355) {
   z-index: 355;
   -webkit-transform: translateX(-141.6px) translateY(-141.6px);
           transform: translateX(-141.6px) translateY(-141.6px);
 }
 
-.shoe-container > .card:nth-of-type(356) {
+.deck-container > .card:nth-of-type(356) {
   z-index: 356;
   -webkit-transform: translateX(-142px) translateY(-142px);
           transform: translateX(-142px) translateY(-142px);
 }
 
-.shoe-container > .card:nth-of-type(357) {
+.deck-container > .card:nth-of-type(357) {
   z-index: 357;
   -webkit-transform: translateX(-142.4px) translateY(-142.4px);
           transform: translateX(-142.4px) translateY(-142.4px);
 }
 
-.shoe-container > .card:nth-of-type(358) {
+.deck-container > .card:nth-of-type(358) {
   z-index: 358;
   -webkit-transform: translateX(-142.8px) translateY(-142.8px);
           transform: translateX(-142.8px) translateY(-142.8px);
 }
 
-.shoe-container > .card:nth-of-type(359) {
+.deck-container > .card:nth-of-type(359) {
   z-index: 359;
   -webkit-transform: translateX(-143.2px) translateY(-143.2px);
           transform: translateX(-143.2px) translateY(-143.2px);
 }
 
-.shoe-container > .card:nth-of-type(360) {
+.deck-container > .card:nth-of-type(360) {
   z-index: 360;
   -webkit-transform: translateX(-143.6px) translateY(-143.6px);
           transform: translateX(-143.6px) translateY(-143.6px);
 }
 
-.shoe-container > .card:nth-of-type(361) {
+.deck-container > .card:nth-of-type(361) {
   z-index: 361;
   -webkit-transform: translateX(-144px) translateY(-144px);
           transform: translateX(-144px) translateY(-144px);
 }
 
-.shoe-container > .card:nth-of-type(362) {
+.deck-container > .card:nth-of-type(362) {
   z-index: 362;
   -webkit-transform: translateX(-144.4px) translateY(-144.4px);
           transform: translateX(-144.4px) translateY(-144.4px);
 }
 
-.shoe-container > .card:nth-of-type(363) {
+.deck-container > .card:nth-of-type(363) {
   z-index: 363;
   -webkit-transform: translateX(-144.8px) translateY(-144.8px);
           transform: translateX(-144.8px) translateY(-144.8px);
 }
 
-.shoe-container > .card:nth-of-type(364) {
+.deck-container > .card:nth-of-type(364) {
   z-index: 364;
   -webkit-transform: translateX(-145.2px) translateY(-145.2px);
           transform: translateX(-145.2px) translateY(-145.2px);
 }
-
-.table-action {
-  text-align: center;
-}
-
-.dealer-container {
-  width: 90%;
-  margin: 10px auto;
-}
-
-.player-container {
-  width: 90%;
-  height: 400px;
-  margin: 20px auto;
-  position: relative;
-  text-align: center;
-}
-
-.hand-container {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (minmax(10px, max-content))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(10px, -webkit-max-content));
-      grid-template-columns: repeat(auto-fit, minmax(10px, max-content));
-}
-
-.hand-container > .card {
-  margin: 0 10px;
-}
-
-.player-actions {
-  margin: 20px;
-}
-
-.card {
-  width: 150px;
-  height: auto;
-  border-radius: 20px;
-  border: 1px solid #0000001f;
-}
-/*# sourceMappingURL=shoe.css.map */
+/*# sourceMappingURL=style.css.map */
